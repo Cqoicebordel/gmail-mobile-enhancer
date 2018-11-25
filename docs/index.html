@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <link href='https://fonts.googleapis.com/css?family=Chivo:900' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-dark.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <title>Gmail Mobile Enhancer by Cqoicebordel</title>
+  </head>
+
+  <body>
+    <div id="container">
+      <div class="inner">
+
+        <header>
+          <h1>Gmail Mobile Enhancer</h1>
+          <h2>An UserJS to add a few enhancement on the Gmail mobile site to use it as desktop.</h2>
+        </header>
+
+        <section id="downloads" class="clearfix">
+          <a href="https://github.com/Cqoicebordel/gmail-mobile-enhancer/zipball/master" id="download-zip" class="button"><span>Download .zip</span></a>
+          <a href="https://github.com/Cqoicebordel/gmail-mobile-enhancer/tarball/master" id="download-tar-gz" class="button"><span>Download .tar.gz</span></a>
+          <a href="https://github.com/Cqoicebordel/gmail-mobile-enhancer" id="view-on-github" class="button"><span>View on GitHub</span></a>
+        </section>
+
+        <hr>
+
+        <section id="main_content">
+
+
+<h2>
+<a id="what" class="anchor" href="#what" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>What is it ?</h2>
+
+<p>It's an UserJS that enhance a bit the mobile Gmail site, to avoid using the desktop one. It contains several modifications :</p>
+<ul>
+<li>Dark theme</li>
+<li>A bit more compact UI</li>
+<li>A menu to go to all your folders and labels (you have to configure it first)</li>
+<li>Possibility to write a new mail in a tab</li>
+<li>Buttons to go back and forth</li>
+<li>Open current thread in the classic Gmail Desktop interface</li>
+<li>Change the favicon and site title to show number of unread</li>
+<li>Fix a bug with PgUp and PgDown (and space and shift+space)</li>
+</ul>
+<p>Moreover, the whole thing is pretty modular, so you can modify it to suits you. Everything is commented, and even translatable easily.</p>
+
+<h2>
+<a id="how" class="anchor" href="#how" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>How to install it ?</h2>
+<p>It's an UserJS, so you can drag and drop it in your extension page, or use an extension like Tampermonkey.<br />
+Be aware though, that you need to configure the script. For that, go to your <a href="https://mail.google.com/mail/mu/">Gmail Mobile page</a>, go to the menu page (the hamburger icon at the top left) and execute this line in your console : </p>
+<pre>
+for(var a=document.getElementsByClassName("Tk"),b=[],c=0;c&lt;a.length;c++)b[c]=1&lt;a[c].innerText.split("\n").length?a[c].innerText.split("\n")[1]:a[c].innerText;for(var d=document.getElementsByClassName("Uk"),e=[],f=[],g=[],c=0;c&lt;d.length;c++){e[c]=1&lt;d[c].innerText.trim().split("\n").length?d[c].innerText.trim().split("\n")[1]:d[c].innerText.trim();var h=d[c].getElementsByClassName("bl");f[c]=h[0].style.background;var j=d[c].getElementsByClassName("Og");g[c]=j[0].getAttribute("onclick").split("'")[3]}for(var k="var textsUsual = [",c=0;c&lt;b.length;c++)k+="\""+b[c]+"\", ";k=k.substring(0,k.length-2)+"];",console.log(k);for(var l="var textsLabels = [",c=0;c&lt;e.length;c++)l+="\""+e[c]+"\", ";l=l.substring(0,l.length-2)+"];",console.log(l);for(var m="var colors = [",c=0;c&lt;f.length;c++)m+="\""+f[c]+"\", ";m=m.substring(0,m.length-2)+"];",console.log(m);for(var n="var commandsLabels = [",c=0;c&lt;g.length;c++)n+="\""+g[c]+"\", ";n=n.substring(0,n.length-2)+"];",console.log(n)
+</pre>
+
+<p>It will output some lines.<br />
+Copy those lines in the script to replace the lines with the empty values : </p>
+<pre>
+var textsUsual = [];
+
+var textsLabels = [];
+var commandsLabels = [];
+var colors = [];
+</pre>
+
+<p>And you are done.</p>
+
+<h2>
+<a id="licence" class="anchor" href="#licence" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>What is the licence ?</h2>
+
+<p>The licence is easy : do whatever you want with it, except making money.</p>
+
+<h2>
+<a id="shoutouts" class="anchor" href="#shoutouts" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Shoutouts</h2>
+<p>I stole some part of this project from others :  </p>
+
+<ul>
+<li>The injection of style comes from <a href="https://greasyfork.org/fr/scripts/373498-gmail-colour-and-spacing-changes">Gmail Colour and Spacing Changes</a></li>
+<li>The favicon change is a simplified version of <a href="http://userscripts-mirror.org/scripts/review/39432">Gmail Unread Message Count in Favicon</a></li>
+<li>Almost all the icons come from Gmail except the "My Circles" which is mine, and "External Link" which comes from <a href="https://fontawesome.com/icons/external-link-alt?style=solid">Font Awesome</a></li>
+</ul>
+
+<h2>
+<a id="faq" class="anchor" href="#faq" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>FAQ</h2>
+
+<p><em>Why is this script so heavy ?</em><br />
+Because I included the icons in it in base64. The code in itself represent a quarter of the size.</p>
+        </section>
+
+        <footer>
+          Mid2beep is maintained by <a href="https://github.com/Cqoicebordel">Cqoicebordel</a>
+        </footer>
+
+        
+      </div>
+    </div>
+  </body>
+</html>
