@@ -40,8 +40,8 @@ The licence is easy : do whatever you want with it, except making money.
 
 ## Shoutouts
 I stole some part of this project from others :  
-* The injection of style comes from (Gmail Colour and Spacing Changes)[https://greasyfork.org/fr/scripts/373498-gmail-colour-and-spacing-changes]
-* The favicon change is a simplified version of (Gmail Unread Message Count in Favicon)[http://userscripts-mirror.org/scripts/review/39432]
+* The injection of style comes from [Gmail Colour and Spacing Changes](https://greasyfork.org/fr/scripts/373498-gmail-colour-and-spacing-changes)
+* The favicon change is a simplified version of [Gmail Unread Message Count in Favicon](http://userscripts-mirror.org/scripts/review/39432)
 * Almost all the icons come from Gmail except the "My Circles" which is mine, and "External Link" which comes from [Font Awesome](https://fontawesome.com/icons/external-link-alt?style=solid)
 
 ## FAQ
