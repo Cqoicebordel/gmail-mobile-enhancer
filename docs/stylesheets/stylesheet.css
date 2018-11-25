@@ -98,6 +98,10 @@ header h2 {
   max-width: 100%;
 }
 
+.juxtapose img {
+	max-width: none !important;
+}
+
 #downloads {
   margin-bottom: 40px;
   width:100%;
