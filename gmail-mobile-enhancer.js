@@ -88,11 +88,11 @@
 	// Reduce the header height
 		".gb_3f>.gb_R{line-height:38px !important;height:40px !important;}",
 		".gb_3f{height:40px !important;}",
-		".mj{padding-top:10px !important;}",
-		".mj .qj {margin-top: 0px !important;}",
+		".zh{padding-top:10px !important;}",
+		".zh .qj {margin-top: 0px !important;}",
 		".rj {margin-top: -10px !important;}",
 	// Subject line when in mail view
-		".nj{font-size:20px !important;font-weight: bold !important;}",
+		".nj, .oj{font-size:20px !important;font-weight: bold !important;}",
 	// Add external link to open mail in Gmail classic
 		".external{-webkit-background-size: 24px 24px !important; background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAMAAABg3Am1AAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAAVUExURQAAAGBgYGFhYWNjY2FhYWBgYGFhYfUIR/gAAAAGdFJOUwA9rhncf2Rja9EAAADkSURBVEjH1ZVJEoUgDAXJgPc/8scBJSED7r5vY5V2Q0IhlPK9gEiKE28iTNn4mwq8nKELgGwEDOMQQA8zflQGWHXK6aUB1wuuRqw+mlDbo4adoxSajyFfZUmULW5Vfe0t0zKfC51HXhNuvq9VIjx8X91YGPnLCAXJnwYFguabAVR8YeafX4Re8J7g8o7g87YQ8KYQ8ZageNwYQgHU+Gr/z8K1ze56UuE0nvpzYTeGfheEQuOpsCKI/L+QnkuggbbonB2U085BtyjC+eg9dgI6sS424i0MgzmtG7Ncql5JNb+av5cfhQIO95cXPYkAAAAASUVORK5CYII=);}"
 	].join("\n");
