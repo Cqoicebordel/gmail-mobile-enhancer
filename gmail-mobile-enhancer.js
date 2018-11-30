@@ -51,12 +51,12 @@
 
 	var css = [
 	// Translate the buttons to avoid occulting other buttons
-		".vs{transform: translate3d(0px, 38px, 0px) !important;}",
+		".ws{transform: translate3d(0px, 38px, 0px) !important;}",
 		".Dh{padding: 0 6px !important;min-height: 0 !important;}",
 	// Dark mode
 		"body{filter: invert(85%);}",
 	// Protect from dark mode
-		".Pg, .sm, .bl, .gb_dc .gb_fc, .gb_cc, .Ke, .gbii, .Pi, .rm, .gbip,.Jn, .cr, .zq, .realarrows, .labels, img{filter: invert(100%) !important;}",
+		".Pg, .Sl, .cl, .gb_dc .gb_fc, .gb_cc, .Ke, .gbii, .Pi, .gbip,.Kn, .cr, .zq, .realarrows, .labels, img{filter: invert(100%) !important;}",
 	// Reduce height of the empty bar at the top
 		"#gba{height: 40px !important;}",
 		".gb_0f>.gb_R {height: 40px;line-height: 38px !important;}",
@@ -71,10 +71,10 @@
 		".arrowleft{background-image:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAQAAAAngNWGAAAAKklEQVR4AWMY9uA/7/8d/y2JUXbs////NcQpa6aTMkyFA6u0hvgAH74AALYNOnGv1Wh5AAAAAElFTkSuQmCC)}",
 		".arrowright{background-image:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAQAAAAngNWGAAAAK0lEQVR4AWMYxuC/5f8d/3mJUVjz////Y8QpbR5ApQiFdFSGCB5iA3y4AwCbRTpxjexg8AAAAABJRU5ErkJggg==)}",
 	// Bold date of unread mail
-		".wm .dk {font-weight: bold; !important}",
+		".xm .ek {font-weight: bold; !important}",
 		".pi{color:#007b35cc !important;}",
 	// Give space for the left vertical menu
-		".Hm{margin-left: 42px;}",
+		".Im{margin-left: 42px;}",
 	// Position the menu
 		"#menu{float:left; width:42px;}",
 	// Use img for usual buttons
@@ -82,14 +82,14 @@
 	// Use colors for the labels
 		".labels{height:15px;width:24px;margin:15px 9px; border-radius:3px}",
 	// Bigger help background
-		".Bw{min-height: 700px;}",
+		".Dw{min-height: 700px;}",
 	// Allow full text of labels stickers
 		".Pg{max-width:none !important;}",
 	// Reduce the header height
 		".gb_3f>.gb_R{line-height:38px !important;height:40px !important;}",
 		".gb_3f{height:40px !important;}",
 		".zh{padding-top:10px !important;}",
-		".zh .qj {margin-top: 0px !important;}",
+		".zh .sj {margin-top: 0px !important;}",
 		".rj {margin-top: -10px !important;}",
 	// Subject line when in mail view
 		".nj, .oj{font-size:20px !important;font-weight: bold !important;}",
@@ -116,14 +116,14 @@
 
 
 	// Var to identify class or id. Google can change them often, so putting them here is helpful
-	// <div class="Og" data-onclick="j">Réception<span class="Xl">6</span></div>
-	var numberOfUnreadSpan_class = "Xl";
+	// <div class="Og" data-onclick="j">Réception<span class="Yl">6</span></div>
+	var numberOfUnreadSpan_class = "Yl";
 	// <div class="Tk ec" tabindex="0" role="menuitem" onclick="_e(event, 'Wb','^i')"><div class="bl undefined"></div><div class="Nk"></div><span>Réception</span></div>
-	var listOfUsualInMenu_class = "Tk";
+	var listOfUsualInMenu_class = "Uk";
 	// <div class="Uk gl "><div onclick="_e(event, 'Xb','label1')" class="fl">
-	var listOfLabelsInMenu_class = "Uk";
+	var listOfLabelsInMenu_class = "Vk";
 	// <div class="bl " style="background:#FFC8AF;color:#7A2E0B">&nbsp;</div>
-	var ListOfLabelsPatchOfColorInMenu_class = "bl";
+	var ListOfLabelsPatchOfColorInMenu_class = "cl";
 	// <div class="Og ec" onclick="_e(event, 'Wb','label2')"><div class="Nk"></div><span>Label 2</span></div>
 	var ListOfLabelsActionTextInMenu_class = "Og";
 	// <div id="tl_" class=" Wg  " style=""> 
@@ -133,13 +133,13 @@
 	// <div class="gb_Fb">xxx.xxx@gmail.com</div>
 	var accountEmailAddress_class = "gb_Fb";
 	// <div class="M j T b hc Pm  Ke" onclick="_e(event, 'wa')" role="button" aria-label="Nouveau message" tabindex="0"><div class="V j od"></div></div>
-	var newMailButton_class = "M j T b hc Pm Ke";
+	var newMailButton_class = "M j T b hc Qm Ke";
 	// <div class="us Jm" style="">
-	var mailToolboxBar_class = "us Jm";
+	var mailToolboxBar_class = "ws Km";
 	// <div class="kc">
 	var backButtonsInMailView_class = "kc";
 	// <div class="jm" role="list">
-	var mainListOfMail_class = "jm";
+	var mainListOfMail_class = "km";
 	// <div class="fc Im Vm Rc qc Sc" id="tltbt" style="width: 100%;">
 	var secondLineUI_id = "tltbt";
 
@@ -436,7 +436,7 @@
 	*/
 	function AddExternalLink(){
 		var div = document.createElement('div');
-		div.innerHTML = '<div class="M j T b hc  Zm Mm" id="external" onclick="var mailID = window.location.href.split(\'/\').slice(-1).pop();window.open(\'https://mail.google.com/mail/u/0/#inbox/\'+mailID, \'_blank\');" role="button" aria-label="Open in new tab" title="'+titleTextOpenInNewTabButton+'" tabindex="0"><div class="V j Wc external"></div></div>';
+		div.innerHTML = '<div class="M j T b hc  an Nm" id="external" onclick="var mailID = window.location.href.split(\'/\').slice(-1).pop();window.open(\'https://mail.google.com/mail/u/0/#inbox/\'+mailID, \'_blank\');" role="button" aria-label="Open in new tab" title="'+titleTextOpenInNewTabButton+'" tabindex="0"><div class="V j Wc external"></div></div>';
 
 		var parent = document.getElementsByClassName(mailToolboxBar_class)[0];
 		while(parent === undefined){
@@ -464,7 +464,7 @@
 		var test = document.getElementsByClassName("external")[0];
 		if(test === undefined && window.location.hash.split('/')[0] == "#cv"){
 			var div = document.createElement('div');
-			div.innerHTML = '<div class="M j T b hc  Zm Mm" id="external" onclick="var mailID = window.location.href.split(\'/\').slice(-1).pop();window.open(\'https://mail.google.com/mail/u/0/#inbox/\'+mailID, \'_blank\');" role="button" aria-label="Open in new tab" title="'+titleTextOpenInNewTabButton+'" tabindex="0"><div class="V j Wc external"></div></div>';
+			div.innerHTML = '<div class="M j T b hc  an Nm" id="external" onclick="var mailID = window.location.href.split(\'/\').slice(-1).pop();window.open(\'https://mail.google.com/mail/u/0/#inbox/\'+mailID, \'_blank\');" role="button" aria-label="Open in new tab" title="'+titleTextOpenInNewTabButton+'" tabindex="0"><div class="V j Wc external"></div></div>';
 
 			var parent = document.getElementsByClassName(mailToolboxBar_class)[0];
 			parent.prepend(div.firstChild);
