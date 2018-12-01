@@ -1,5 +1,5 @@
 # Gmail Mobile Enhancer
-An UserJS to add a few enhancement on the Gmail mobile site to use it as desktop.
+An UserJS to add a few enhancement on the [Gmail Mobile site](https://mail.google.com/mail/mu/) to use it as desktop.
 
 ## What is it ?
 It's an UserJS that enhance a bit the mobile Gmail site, to avoid using the desktop one. It contains several modifications :  
@@ -16,15 +16,9 @@ Moreover, the whole thing is pretty modular, so you can modify it to suits you. 
 
 ## How to install it ?
 It's an UserJS, so you can drag and drop it in your extension page, or use an extension like Tampermonkey.
-Be aware though, that you need to configure the script. For that, go to your [Gmail Mobile page](https://mail.google.com/mail/mu/), go to the menu page (the hamburger icon at the top left) and execute this line in your console : 
+Be aware though, that you need to configure the script to have the menu enabled. For that, go to your [Gmail Mobile page](https://mail.google.com/mail/mu/), go to the menu page (the hamburger icon, and the menu should be loaded.
 
-```js
-for(var a=document.getElementsByClassName("Tk"),b=[],c=0;c<a.length;c++)b[c]=1<a[c].innerText.split("\n").length?a[c].innerText.split("\n")[1]:a[c].innerText;for(var d=document.getElementsByClassName("Uk"),e=[],f=[],g=[],c=0;c<d.length;c++){e[c]=1<d[c].innerText.trim().split("\n").length?d[c].innerText.trim().split("\n")[1]:d[c].innerText.trim();var h=d[c].getElementsByClassName("bl");f[c]=h[0].style.background;var j=d[c].getElementsByClassName("Og");g[c]=j[0].getAttribute("onclick").split("'")[3]}for(var k="var textsUsual = [",c=0;c<b.length;c++)k+="\""+b[c]+"\", ";k=k.substring(0,k.length-2)+"];",console.log(k);for(var l="var textsLabels = [",c=0;c<e.length;c++)l+="\""+e[c]+"\", ";l=l.substring(0,l.length-2)+"];",console.log(l);for(var m="var colors = [",c=0;c<f.length;c++)m+="\""+f[c]+"\", ";m=m.substring(0,m.length-2)+"];",console.log(m);for(var n="var commandsLabels = [",c=0;c<g.length;c++)n+="\""+g[c]+"\", ";n=n.substring(0,n.length-2)+"];",console.log(n)
-```
-
-It will output some lines.
-Copy those lines in the script to replace the lines with the empty values : 
-
+If you want to avoid having to open the menu each time to have the menu, just open your console (after opening the menu once) and replace the lines in the userJS
 ```js
 	var textsUsual = [];
 
@@ -32,8 +26,7 @@ Copy those lines in the script to replace the lines with the empty values :
 	var commandsLabels = [];
 	var colors = [];
 ```
-
-And you are done.
+by those provided in the console. And you should be done.
 
 ## What is the licence ?
 The licence is easy : do whatever you want with it, except making money.

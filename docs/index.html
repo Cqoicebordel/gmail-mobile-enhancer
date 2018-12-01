@@ -62,13 +62,10 @@
 <h2>
 <a id="how" class="anchor" href="#how" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>How to install it ?</h2>
 <p>It's an UserJS, so you can drag and drop it in your extension page, or use an extension like Tampermonkey.<br />
-Be aware though, that you need to configure the script. For that, go to your <a href="https://mail.google.com/mail/mu/">Gmail Mobile page</a>, go to the menu page (the hamburger icon at the top left) and execute this line in your console : </p>
-<pre>
-for(var a=document.getElementsByClassName("Tk"),b=[],c=0;c&lt;a.length;c++)b[c]=1&lt;a[c].innerText.split("\n").length?a[c].innerText.split("\n")[1]:a[c].innerText;for(var d=document.getElementsByClassName("Uk"),e=[],f=[],g=[],c=0;c&lt;d.length;c++){e[c]=1&lt;d[c].innerText.trim().split("\n").length?d[c].innerText.trim().split("\n")[1]:d[c].innerText.trim();var h=d[c].getElementsByClassName("bl");f[c]=h[0].style.background;var j=d[c].getElementsByClassName("Og");g[c]=j[0].getAttribute("onclick").split("'")[3]}for(var k="var textsUsual = [",c=0;c&lt;b.length;c++)k+="\""+b[c]+"\", ";k=k.substring(0,k.length-2)+"];",console.log(k);for(var l="var textsLabels = [",c=0;c&lt;e.length;c++)l+="\""+e[c]+"\", ";l=l.substring(0,l.length-2)+"];",console.log(l);for(var m="var colors = [",c=0;c&lt;f.length;c++)m+="\""+f[c]+"\", ";m=m.substring(0,m.length-2)+"];",console.log(m);for(var n="var commandsLabels = [",c=0;c&lt;g.length;c++)n+="\""+g[c]+"\", ";n=n.substring(0,n.length-2)+"];",console.log(n)
-</pre>
+Be aware though, that you need to configure the script to have the menu enabled. For that, go to your <a href="https://mail.google.com/mail/mu/">Gmail Mobile page</a>, go to the menu page (the hamburger icon at the top left), and the menu should be loaded.</p>
 
-<p>It will output some lines.<br />
-Copy those lines in the script to replace the lines with the empty values : </p>
+
+<p>If you want to avoid having to open the menu each time to have the menu, just open your console (after opening the menu once) and replace the lines in the userJS</p>
 <pre>
 var textsUsual = [];
 
@@ -76,8 +73,7 @@ var textsLabels = [];
 var commandsLabels = [];
 var colors = [];
 </pre>
-
-<p>And you are done.</p>
+<p>by those provided in the console. And you should be done.</p>
 
 <h2>
 <a id="licence" class="anchor" href="#licence" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>What is the licence ?</h2>

@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name           Gmail Mobile Enhancer
 // @description    A few enhancement on the Gmail mobile site to use it as desktop.
-// @version        1.00
-// @date           2018-11-24
+// @version        1.01
+// @date           2018-11-30
 // @author         Cqoicebordel
 // @namespace      http://www.cqoicebordel.net/gmail-mobile-enhancer
 // @include        http://mail.google.com/mail/mu/*
@@ -63,9 +63,8 @@
 	// Change background if the page doesn't go all the way down
 		"html{background-color: #262626 !important;}",
 	// Enhance the unreads
-		".wm .Ml {font-style: italic !important;font-weight: bold !important;}",
-		".Dh b {font-style: italic !important;}",
-		".wm .Nl {font-weight: bold !important;}",
+		".xm .Ml, .xm .Nl  {font-style: italic !important;font-weight: bold !important;}",
+		".xm .Nl {font-weight: bold !important;}",
 	// Margins of arrows
 		".arrows{margin: 1px 6px; width: 20px; height: 20px; vertical-align: text-top; }",
 		".arrowleft{background-image:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAQAAAAngNWGAAAAKklEQVR4AWMY9uA/7/8d/y2JUXbs////NcQpa6aTMkyFA6u0hvgAH74AALYNOnGv1Wh5AAAAAElFTkSuQmCC)}",
@@ -292,7 +291,7 @@
 	*/
 	function InitStaticMenu(){
 		var TkList = document.getElementsByClassName(listOfUsualInMenu_class);
-		var textsUsual = [];
+		//var textsUsual = [];
 		for(var i=0; i<TkList.length; i++){
 			if(TkList[i].innerText.split("\n").length > 1){
 				textsUsual[i] = TkList[i].innerText.split("\n")[1];
@@ -302,9 +301,9 @@
 		}
 
 		var UkList = document.getElementsByClassName(listOfLabelsInMenu_class);
-		var textsLabels = [];
-		var colors = [];
-		var commandsLabels = [];
+		//var textsLabels = [];
+		//var colors = [];
+		//var commandsLabels = [];
 		for(var i=0; i<UkList.length; i++){
 			if(UkList[i].innerText.trim().split("\n").length > 1){
 				textsLabels[i] = UkList[i].innerText.trim().split("\n")[1];
@@ -315,7 +314,7 @@
 			colors[i] = blList[0].style.background;
 			var OgList = UkList[i].getElementsByClassName(ListOfLabelsActionTextInMenu_class);
 
-			commandsLabels[i] = OgList[0].getAttribute('onclick').split("'")[3];
+			commandsLabels[i] = OgList[0].getAttribute('data-onclick-arg');
 		}
 
 		var stringTextUsual = 'var textsUsual = [';
@@ -347,12 +346,6 @@
 		console.log(stringCommandsLabels);
 	}
 
-	/**
-	* One liner to get initialize the menu's variables
-	*/
-	function InitStaticMenuMin(){
-		for(var a=document.getElementsByClassName("Tk"),b=[],c=0;c<a.length;c++)b[c]=1<a[c].innerText.split("\n").length?a[c].innerText.split("\n")[1]:a[c].innerText;for(var d=document.getElementsByClassName("Uk"),e=[],f=[],g=[],c=0;c<d.length;c++){e[c]=1<d[c].innerText.trim().split("\n").length?d[c].innerText.trim().split("\n")[1]:d[c].innerText.trim();var h=d[c].getElementsByClassName("bl");f[c]=h[0].style.background;var j=d[c].getElementsByClassName("Og");g[c]=j[0].getAttribute("onclick").split("'")[3]}for(var k="var textsUsual = [",c=0;c<b.length;c++)k+="\""+b[c]+"\", ";k=k.substring(0,k.length-2)+"];",console.log(k);for(var l="var textsLabels = [",c=0;c<e.length;c++)l+="\""+e[c]+"\", ";l=l.substring(0,l.length-2)+"];",console.log(l);for(var m="var colors = [",c=0;c<f.length;c++)m+="\""+f[c]+"\", ";m=m.substring(0,m.length-2)+"];",console.log(m);for(var n="var commandsLabels = [",c=0;c<g.length;c++)n+="\""+g[c]+"\", ";n=n.substring(0,n.length-2)+"];",console.log(n)
-	}
 
 	/**
 	* Create a dynamic menu with unread count. Doesn't work.
@@ -563,9 +556,9 @@
 	* Indicates when we change view, from timeline to mail view (for example)
 	*/
 	function CheckHash(){
+		var array = window.location.hash.split('/');
 		var test = document.getElementsByClassName("external")[0];
 		if(test === undefined){
-			var array = window.location.hash.split('/');
 			if(array.length>2 && array[0] == "#cv"){
 				AddExternalLink();
 			}else{
@@ -578,8 +571,7 @@
 
 		var mailList = document.getElementsByClassName(mainListOfMail_class)[0];
 		if(mailList !== undefined){
-			var array2 = window.location.hash.split('/');
-			if(array2.length>2 && array2[0] == "#cv"){
+			if(array.length>2 && array[0] == "#cv"){
 				var interval = setInterval(function() {
 					var nodeMenu = document.getElementsByClassName("messageCount")[0];
 					if (typeof nodeMenu == 'undefined') return;
@@ -594,6 +586,18 @@
 					elems[i].innerText="";
 				}
 			}
+		}
+
+		if(array.length==1 && array[0] == "#mn"){
+			var interval = setInterval(function() {
+				// Wait for "Labels" to exist
+				var nodeLabels = document.getElementsByClassName(listOfLabelsInMenu_class);
+				if (typeof nodeLabels == 'undefined') return;
+				clearInterval(interval);
+
+				InitStaticMenu();
+
+			}, 100);
 		}
 	}
 
