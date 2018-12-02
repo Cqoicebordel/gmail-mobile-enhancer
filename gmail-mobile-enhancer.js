@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name           Gmail Mobile Enhancer
 // @description    A few enhancement on the Gmail mobile site to use it as desktop.
-// @version        1.01
-// @date           2018-11-30
+// @version        1.03
+// @date           2018-12-02
 // @author         Cqoicebordel
 // @namespace      http://www.cqoicebordel.net/gmail-mobile-enhancer
 // @include        http://mail.google.com/mail/mu/*
@@ -56,7 +56,7 @@
 	// Dark mode
 		"body{filter: invert(85%);}",
 	// Protect from dark mode
-		".Pg, .Sl, .cl, .gb_dc .gb_fc, .gb_cc, .Ke, .gbii, .Pi, .gbip,.Kn, .cr, .zq, .realarrows, .labels, img{filter: invert(100%) !important;}",
+		".Pg, .Sl, .cl, .gb_fc .gb_hc, .Ke, .gbii, .qh.Qi:not(.Fh), .gbip,.Kn, .cr, .zq, .realarrows, .labels, img{filter: invert(100%) !important;}",
 	// Reduce height of the empty bar at the top
 		"#gba{height: 40px !important;}",
 		".gb_0f>.gb_R {height: 40px;line-height: 38px !important;}",
@@ -125,7 +125,7 @@
 	var ListOfLabelsPatchOfColorInMenu_class = "cl";
 	// <div class="Og ec" onclick="_e(event, 'Wb','label2')"><div class="Nk"></div><span>Label 2</span></div>
 	var ListOfLabelsActionTextInMenu_class = "Og";
-	// <div id="tl_" class=" Wg  " style=""> 
+	// <div id="tl_" class=" Wg  " style="">
 	var mainTimeline_id = "tl_";
 	// <div class="Yg" style="bottom: 0px;"><div id="menu">
 	var parentOfTheMenu_class = "Yg";
@@ -271,7 +271,7 @@
 		}
 
 		for(var i=0; i<textsLabels.length; i++){
-			divString += '<div class="menuitem labels" onclick="document.location.hash=\'tl/'+commandsLabels[i]+'\'" title="'+textsLabels[i]+'" style="background-color:'+colors[i]+'"></div>';
+			divString += '<div class="menuitem labels" onclick="document.location.hash=\'tl/'+commandsLabels[i]+'\'" title="'+textsLabels[i]+'" style="background-color:'+((colors[i]===undefined)?'#777777':colors[i])+'"></div>';
 		}
 
 		divString += '</div>';
@@ -311,7 +311,9 @@
 				textsLabels[i] = UkList[i].innerText.trim();
 			}
 			var blList = UkList[i].getElementsByClassName(ListOfLabelsPatchOfColorInMenu_class);
-			colors[i] = blList[0].style.background;
+			if(blList.length > 0){
+				colors[i] = blList[0].style.background;
+			}
 			var OgList = UkList[i].getElementsByClassName(ListOfLabelsActionTextInMenu_class);
 
 			commandsLabels[i] = OgList[0].getAttribute('data-onclick-arg');
@@ -474,8 +476,8 @@
 		divIn.innerHTML = '<div class="M T arrows messageCount" ></div>';
 		var div2 = document.createElement('div');
 		div2.innerHTML = '<div class="M T realarrows arrows arrowright" onclick="var pressthiskey=\'j\'; var e = new Event(\'keypress\'); e.key=pressthiskey; e.keyCode=e.key.charCodeAt(0); e.which=e.keyCode; e.altKey=false; e.ctrlKey=false; e.shiftKey=false; e.metaKey=false; e.bubbles=true; document.dispatchEvent(e);" title="'+titleTextOlderMailButton+'"></div>';
-		
-		
+
+
 		var nodes = document.getElementsByClassName(backButtonsInMailView_class);
 		for(var i=0; i<nodes.length; i++){
 			var elClone1 = div1.cloneNode(true);
@@ -485,7 +487,7 @@
 			var elClone2 = div2.cloneNode(true);
 			nodes[i].appendChild(elClone2.firstChild);
 		}
-		
+
 		var elem = document.getElementById(secondLineUI_id);
 		if(elem !== undefined){
 			var wrongArrows = elem.getElementsByClassName("arrows");
@@ -596,6 +598,7 @@
 				clearInterval(interval);
 
 				InitStaticMenu();
+				CreateStaticMenu();
 
 			}, 100);
 		}
