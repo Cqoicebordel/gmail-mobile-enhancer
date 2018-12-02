@@ -59,7 +59,7 @@
 		".Pg, .Sl, .cl, .gb_fc .gb_hc, .Ke, .gbii, .qh.Qi:not(.Fh), .gbip,.Kn, .cr, .zq, .realarrows, .labels, img{filter: invert(100%) !important;}",
 	// Reduce height of the empty bar at the top
 		"#gba{height: 40px !important;}",
-		".gb_0f>.gb_R {height: 40px;line-height: 38px !important;}",
+		".gb_4f>.gb_R {height: 40px;line-height: 38px !important;}",
 	// Change background if the page doesn't go all the way down
 		"html{background-color: #262626 !important;}",
 	// Enhance the unreads
