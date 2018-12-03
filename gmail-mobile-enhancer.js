@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name           Gmail Mobile Enhancer
 // @description    A few enhancement on the Gmail mobile site to use it as desktop.
-// @version        1.03
-// @date           2018-12-02
+// @version        1.04
+// @date           2018-12-03
 // @author         Cqoicebordel
 // @namespace      http://www.cqoicebordel.net/gmail-mobile-enhancer
 // @include        http://mail.google.com/mail/mu/*
@@ -56,10 +56,12 @@
 	// Dark mode
 		"body{filter: invert(85%);}",
 	// Protect from dark mode
-		".Pg, .Sl, .cl, .gb_fc .gb_hc, .Ke, .gbii, .qh.Qi:not(.Fh), .gbip,.Kn, .cr, .zq, .realarrows, .labels, img{filter: invert(100%) !important;}",
+		".Pg, .Sl, .cl, .gb_fc .gb_hc, .gb_cc, .Ke, .gbii, .qh.Qi:not(.Fh), .gbip,.Kn, .cr, .zq, .sm.sj, .realarrows, .labels, img{filter: invert(100%) !important;}",
 	// Reduce height of the empty bar at the top
 		"#gba{height: 40px !important;}",
 		".gb_4f>.gb_R {height: 40px;line-height: 38px !important;}",
+	// Second bar of the UI can go over the buttons
+		".zc{    left: 200px !important;padding-right: 200px !important;}",
 	// Change background if the page doesn't go all the way down
 		"html{background-color: #262626 !important;}",
 	// Enhance the unreads
