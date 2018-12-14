@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name           Gmail Mobile Enhancer
 // @description    A few enhancement on the Gmail mobile site to use it as desktop.
-// @version        1.04
-// @date           2018-12-03
+// @version        1.05
+// @date           2018-12-12
 // @author         Cqoicebordel
 // @namespace      http://www.cqoicebordel.net/gmail-mobile-enhancer
 // @include        http://mail.google.com/mail/mu/*
@@ -56,10 +56,9 @@
 	// Dark mode
 		"body{filter: invert(85%);}",
 	// Protect from dark mode
-		".Pg, .Sl, .cl, .gb_fc .gb_hc, .gb_cc, .Ke, .gbii, .qh.Qi:not(.Fh), .gbip,.Kn, .cr, .zq, .sm.sj, .realarrows, .labels, img{filter: invert(100%) !important;}",
+		".Pg, .Sl, .cl, .gb_fc .gb_hc, .gb_mc, .Ke, .gbii, .qh.Qi:not(.Fh), .gbip,.Kn, .cr, .zq, .sm.sj, .realarrows, .labels, img{filter: invert(100%) !important;}",
 	// Reduce height of the empty bar at the top
 		"#gba{height: 40px !important;}",
-		".gb_4f>.gb_R {height: 40px;line-height: 38px !important;}",
 	// Second bar of the UI can go over the buttons
 		".zc{    left: 200px !important;padding-right: 200px !important;}",
 	// Change background if the page doesn't go all the way down
@@ -67,6 +66,8 @@
 	// Enhance the unreads
 		".xm .Ml, .xm .Nl  {font-style: italic !important;font-weight: bold !important;}",
 		".xm .Nl {font-weight: bold !important;}",
+	// Enhance the reads
+		".rm .Ml{color: #333;}",
 	// Margins of arrows
 		".arrows{margin: 1px 6px; width: 20px; height: 20px; vertical-align: text-top; }",
 		".arrowleft{background-image:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAQAAAAngNWGAAAAKklEQVR4AWMY9uA/7/8d/y2JUXbs////NcQpa6aTMkyFA6u0hvgAH74AALYNOnGv1Wh5AAAAAElFTkSuQmCC)}",
@@ -87,8 +88,8 @@
 	// Allow full text of labels stickers
 		".Pg{max-width:none !important;}",
 	// Reduce the header height
-		".gb_3f>.gb_R{line-height:38px !important;height:40px !important;}",
-		".gb_3f{height:40px !important;}",
+		".gb_9f>.gb_R, .gb_eg>.gb_R,.gb_eg{line-height:38px !important;height:40px !important;}",
+		".gb_9f{height:40px !important;}",
 		".zh{padding-top:10px !important;}",
 		".zh .sj {margin-top: 0px !important;}",
 		".rj {margin-top: -10px !important;}",
