@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name           Gmail Mobile Enhancer
 // @description    A few enhancement on the Gmail mobile site to use it as desktop.
-// @version        1.06
-// @date           2018-12-19
+// @version        1.07
+// @date           2019-01-17
 // @author         Cqoicebordel
 // @namespace      http://www.cqoicebordel.net/gmail-mobile-enhancer
 // @include        http://mail.google.com/mail/mu/*
@@ -56,7 +56,7 @@
 	// Dark mode
 		"body{filter: invert(85%);}",
 	// Protect from dark mode
-		".Pg, .Sl, .cl, .gb_fc .gb_hc, .gb_mc, .Ke, .gbii, .qh.Qi:not(.Fh), .gbip,.Kn, .cr, .zq, .sm.sj, .realarrows, .labels, img{filter: invert(100%) !important;}",
+		".Pg, .Sl, .cl, .gb_vc .gb_xc, .gb_mc, .Ke, .gbii, .qh.Qi:not(.Fh), .gbip,.Kn, .cr, .zq, .sm.sj, .realarrows, .labels, img{filter: invert(100%) !important;}",
 	// Reduce height of the empty bar at the top
 		"#gba{height: 40px !important;}",
 	// Second bar of the UI can go over the buttons
@@ -88,8 +88,8 @@
 	// Allow full text of labels stickers
 		".Pg{max-width:none !important;}",
 	// Reduce the header height
-		".gb_9f>.gb_R, .gb_eg>.gb_R,.gb_eg{line-height:38px !important;height:40px !important;}",
-		".gb_9f{height:40px !important;}",
+		".gb_mg>.gb_R, .gb_eg>.gb_R,.gb_eg{line-height:38px !important;height:40px !important;}",
+		".gb_mg{height:40px !important;}",
 		".zh{padding-top:10px !important;}",
 		".zh .sj {margin-top: 0px !important;}",
 		".rj {margin-top: -10px !important;}",
@@ -133,7 +133,7 @@
 	// <div class="Yg" style="bottom: 0px;"><div id="menu">
 	var parentOfTheMenu_class = "Yg";
 	// <div class="gb_Fb">xxx.xxx@gmail.com</div>
-	var accountEmailAddress_class = "gb_Fb";
+	var accountEmailAddress_class = "gb_Pb";
 	// <div class="M j T b hc Pm  Ke" onclick="_e(event, 'wa')" role="button" aria-label="Nouveau message" tabindex="0"><div class="V j od"></div></div>
 	var newMailButton_class = "M j T b hc Qm Ke";
 	// <div class="us Jm" style="">
