@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name           Gmail Mobile Enhancer
 // @description    A few enhancement on the Gmail mobile site to use it as desktop.
-// @version        1.07
-// @date           2019-01-17
+// @version        1.08
+// @date           2019-02-18
 // @author         Cqoicebordel
 // @namespace      http://www.cqoicebordel.net/gmail-mobile-enhancer
 // @include        http://mail.google.com/mail/mu/*
@@ -50,8 +50,7 @@
 	***************************************/
 
 	var css = [
-	// Translate the buttons to avoid occulting other buttons
-		".ws{transform: translate3d(0px, 38px, 0px) !important;}",
+	// Narrow the list of mails
 		".Dh{padding: 0 6px !important;min-height: 0 !important;}",
 	// Dark mode
 		"body{filter: invert(85%);}",
@@ -120,8 +119,8 @@
 	// Var to identify class or id. Google can change them often, so putting them here is helpful
 	// <div class="Og" data-onclick="j">Réception<span class="Yl">6</span></div>
 	var numberOfUnreadSpan_class = "Yl";
-	// <div class="Tk ec" tabindex="0" role="menuitem" onclick="_e(event, 'Wb','^i')"><div class="bl undefined"></div><div class="Nk"></div><span>Réception</span></div>
-	var listOfUsualInMenu_class = "Uk";
+	// <div class="Tk ec" tabindex="0" role="menuitem" onclick="_e(event, 'Wb','^i')"><div class="bl undefined"></div><div class="Nk"></div><span>Réception</span></div> .Uk
+	var listOfUsualInMenu_class = "#mn_ > div > div > div > div[role='menuitem']";
 	// <div class="Uk gl "><div onclick="_e(event, 'Xb','label1')" class="fl">
 	var listOfLabelsInMenu_class = "Vk";
 	// <div class="bl " style="background:#FFC8AF;color:#7A2E0B">&nbsp;</div>
@@ -131,17 +130,15 @@
 	// <div id="tl_" class=" Wg  " style="">
 	var mainTimeline_id = "tl_";
 	// <div class="Yg" style="bottom: 0px;"><div id="menu">
-	var parentOfTheMenu_class = "Yg";
-	// <div class="gb_Fb">xxx.xxx@gmail.com</div>
-	var accountEmailAddress_class = "gb_Pb";
+	var parentOfTheMenu_class = "#tl_ > div:nth-child(1)";
 	// <div class="M j T b hc Pm  Ke" onclick="_e(event, 'wa')" role="button" aria-label="Nouveau message" tabindex="0"><div class="V j od"></div></div>
-	var newMailButton_class = "M j T b hc Qm Ke";
+	var newMailButton_class = "#tltbt > div > div.M.j.T.b.hc.Qm.Ke";
 	// <div class="us Jm" style="">
-	var mailToolboxBar_class = "ws Km";
+	var mailToolboxBar_class = "#views > div > div.ws.Km";
 	// <div class="kc">
-	var backButtonsInMailView_class = "kc";
-	// <div class="jm" role="list">
-	var mainListOfMail_class = "km";
+	var backButtonsInMailView_class = "#cv__cntbt > div.kc, #cv__cntbb > div.kc";
+	// <div class="jm" role="list"> .km
+	var mainListOfMail_class = "#tl_ > div > div > div[role='list']";
 	// <div class="fc Im Vm Rc qc Sc" id="tltbt" style="width: 100%;">
 	var secondLineUI_id = "tltbt";
 
@@ -281,7 +278,7 @@
 		var div = document.createElement('div');
 		div.innerHTML = divString;
 
-		var parent = document.getElementById(mainTimeline_id).getElementsByClassName(parentOfTheMenu_class)[0];
+		var parent = document.querySelector(parentOfTheMenu_class);
 		var menuDiv = document.getElementById("menu");
 		if(menuDiv != null){
 			menuDiv.remove();
@@ -293,7 +290,7 @@
 	* Go to the menu page and copy paste the code inside this function to be executed in the devtools. You'll have the text to copy for the settings
 	*/
 	function InitStaticMenu(){
-		var TkList = document.getElementsByClassName(listOfUsualInMenu_class);
+		var TkList = document.querySelectorAll(listOfUsualInMenu_class);
 		//var textsUsual = [];
 		for(var i=0; i<TkList.length; i++){
 			if(TkList[i].innerText.split("\n").length > 1){
@@ -356,7 +353,7 @@
 	* Create a dynamic menu with unread count. Doesn't work.
 	*/
 	function CreateMenu(){
-		var TkList = document.getElementsByClassName(listOfUsualInMenu_class);
+		var TkList = document.querySelectorAll(listOfUsualInMenu_class);
 		var textsUsual = [];
 		var commandsUsual = [];
 		var unreadUsual = [];
@@ -399,7 +396,7 @@
 		divString += '</div>';
 		var div = document.createElement('div');
 		div.innerHTML = divString;
-		var parent = document.getElementsByClassName(parentOfTheMenu_class)[0];
+		var parent = document.querySelector(parentOfTheMenu_class);
 		var menuDiv = document.getElementById("menu");
 		if(menuDiv != null){
 			menuDiv.remove();
@@ -414,15 +411,14 @@
 	function ChangeTitle(){
 		var countspan = document.getElementsByClassName(numberOfUnreadSpan_class)[0];
 		var count = countspan ? parseInt(countspan.innerText, 10) : 0;
-		var account = document.getElementsByClassName(accountEmailAddress_class)[0];
-		document.title = "("+count+") "+account.innerText + " - Gmail";
+		document.title = "("+count+") "+ USER_EMAIL + " - Gmail";
 	}
 
 	/**
 	* Create a link to be able to write a new mail in a new tab. Ctrl+click the new mail icon. Uses the desktop Gmail for it.
 	*/
 	function CreateNewMailTab(){
-		var el = document.getElementsByClassName(newMailButton_class)[0];
+		var el = document.querySelector(newMailButton_class);
 		var elClone = el.cloneNode(true);
 		elClone.setAttribute("onclick", "if(event.ctrlKey){window.open('https://mail.google.com/mail/?view=cm&fs=1&tf=1', '_blank');event.stopPropagation();}else{_e(event, 'wa')}");
 		elClone.title = titleTextNewMailButton;
@@ -436,9 +432,9 @@
 		var div = document.createElement('div');
 		div.innerHTML = '<div class="M j T b hc  an Nm" id="external" onclick="var mailID = window.location.href.split(\'/\').slice(-1).pop();window.open(\'https://mail.google.com/mail/u/0/#inbox/\'+mailID, \'_blank\');" role="button" aria-label="Open in new tab" title="'+titleTextOpenInNewTabButton+'" tabindex="0"><div class="V j Wc external"></div></div>';
 
-		var parent = document.getElementsByClassName(mailToolboxBar_class)[0];
+		var parent = document.querySelector(mailToolboxBar_class);
 		while(parent === undefined){
-			parent = document.getElementsByClassName(mailToolboxBar_class)[0];
+			parent = document.querySelector(mailToolboxBar_class);
 		}
 		parent.prepend(div.firstChild);
 
@@ -464,7 +460,7 @@
 			var div = document.createElement('div');
 			div.innerHTML = '<div class="M j T b hc  an Nm" id="external" onclick="var mailID = window.location.href.split(\'/\').slice(-1).pop();window.open(\'https://mail.google.com/mail/u/0/#inbox/\'+mailID, \'_blank\');" role="button" aria-label="Open in new tab" title="'+titleTextOpenInNewTabButton+'" tabindex="0"><div class="V j Wc external"></div></div>';
 
-			var parent = document.getElementsByClassName(mailToolboxBar_class)[0];
+			var parent = document.querySelector(mailToolboxBar_class);
 			parent.prepend(div.firstChild);
 		}
 	}
@@ -481,7 +477,7 @@
 		div2.innerHTML = '<div class="M T realarrows arrows arrowright" onclick="var pressthiskey=\'j\'; var e = new Event(\'keypress\'); e.key=pressthiskey; e.keyCode=e.key.charCodeAt(0); e.which=e.keyCode; e.altKey=false; e.ctrlKey=false; e.shiftKey=false; e.metaKey=false; e.bubbles=true; document.dispatchEvent(e);" title="'+titleTextOlderMailButton+'"></div>';
 
 
-		var nodes = document.getElementsByClassName(backButtonsInMailView_class);
+		var nodes = document.querySelectorAll(backButtonsInMailView_class);
 		for(var i=0; i<nodes.length; i++){
 			var elClone1 = div1.cloneNode(true);
 			nodes[i].appendChild(elClone1.firstChild);
@@ -504,7 +500,7 @@
 	* Adds message count between the arrows in mail view
 	*/
 	function AddMessageCount(){
-		var mailList = document.getElementsByClassName(mainListOfMail_class)[0].children;
+		var mailList = document.querySelector(mainListOfMail_class).children;
 		var tabSplit =  window.location.hash.split('/');
 		var currentId = tabSplit[tabSplit.length-1];
 		for(var i=0; i<mailList.length; i++){
@@ -530,7 +526,7 @@
 				window.scrollBy(0,-(window.innerHeight-100));
 				e.stopPropagation();
 				e.preventDefault();
-			}else if (e.keyCode === 34 || (e.keyCode === 32 && !document.activeElement.isContentEditable)) {
+			}else if (e.keyCode === 34 || (e.keyCode === 32 && !(document.activeElement.isContentEditable || document.activeElement.type == "search"))) {
 				window.scrollBy(0,(window.innerHeight-100));
 				e.stopPropagation();
 				e.preventDefault();
@@ -574,7 +570,7 @@
 			}
 		}
 
-		var mailList = document.getElementsByClassName(mainListOfMail_class)[0];
+		var mailList = document.querySelector(mainListOfMail_class);
 		if(mailList !== undefined){
 			if(array.length>2 && array[0] == "#cv"){
 				var interval = setInterval(function() {
@@ -614,7 +610,7 @@
 	function AsyncFunctions(){
 		var interval = setInterval(function() {
 			// Wait for "New Mail" button to exist
-			var nodeMenu = document.getElementsByClassName(newMailButton_class)[0];
+			var nodeMenu = document.querySelector(newMailButton_class);
 			if (typeof nodeMenu == 'undefined') return;
 			clearInterval(interval);
 
@@ -625,7 +621,7 @@
 		var interval2 = setInterval(function() {
 			// Makes sure we are in the "timeline" mode, and that it is loaded
 			var nodeMenu = document.getElementById(mainTimeline_id);
-			if (typeof nodeMenu == 'undefined' || nodeMenu.getElementsByClassName(parentOfTheMenu_class)[0] === undefined || document.location.hash.split('/')[0] != "#tl") return;
+			if (typeof nodeMenu == 'undefined' || nodeMenu.querySelector(parentOfTheMenu_class) === undefined || document.location.hash.split('/')[0] != "#tl") return;
 			clearInterval(interval2);
 
 			CreateStaticMenu();
@@ -634,7 +630,7 @@
 
 		var interval3 = setInterval(function() {
 			// Makes sure we are in "mail view" mode, and wait for the "back" button to be there
-			var nodeMenu = document.getElementsByClassName(backButtonsInMailView_class);
+			var nodeMenu = document.querySelectorAll(backButtonsInMailView_class);
 			if (typeof nodeMenu == 'undefined'|| document.location.hash.split('/')[0] != "#cv") return;
 			clearInterval(interval3);
 
