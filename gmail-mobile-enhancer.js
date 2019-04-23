@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name           Gmail Mobile Enhancer
 // @description    A few enhancement on the Gmail mobile site to use it as desktop.
-// @version        1.15
+// @version        1.16
 // @date           2019-04-23
 // @author         Cqoicebordel
 // @namespace      http://www.cqoicebordel.net/gmail-mobile-enhancer
@@ -531,10 +531,12 @@
 		var nodes = document.querySelectorAll(backButtonsInMailView_class);
 		for(var i=0; i<nodes.length; i++){
 			var elClone1 = div1.cloneNode(true);
+			elClone1.firstChild.addEventListener('click', clickHandlerBack);
 			nodes[i].appendChild(elClone1.firstChild);
 			var elIn = divIn.cloneNode(true);
 			nodes[i].appendChild(elIn.firstChild);
 			var elClone2 = div2.cloneNode(true);
+			elClone2.firstChild.addEventListener('click', clickHandlerForth);
 			nodes[i].appendChild(elClone2.firstChild);
 		}
 
@@ -716,8 +718,6 @@
 			clearInterval(interval3);
 
 			CreateBackAndForth();
-			document.querySelector('.arrowleft').addEventListener('click', clickHandlerBack);
-			document.querySelector('.arrowright').addEventListener('click', clickHandlerForth);
 
 		}, 100);
 	}
