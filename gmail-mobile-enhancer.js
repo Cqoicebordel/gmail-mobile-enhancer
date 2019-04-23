@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name           Gmail Mobile Enhancer
 // @description    A few enhancement on the Gmail mobile site to use it as desktop.
-// @version        1.08
-// @date           2019-02-18
+// @version        1.15
+// @date           2019-04-23
 // @author         Cqoicebordel
 // @namespace      http://www.cqoicebordel.net/gmail-mobile-enhancer
 // @include        http://mail.google.com/mail/mu/*
@@ -267,11 +267,11 @@
 		var divString = '<div id="menu">';
 
 		for(var i=0; i<textsUsual.length; i++){
-			divString += '<div class="menuitem usual" onclick="document.location.hash=\'tl/'+textsUsual[i]+'\'"><img src="'+icons[i]+'" title="'+textsUsual[i]+'" /></div>';
+			divString += '<div class="menuitem usual usuC'+i+'"><img src="'+icons[i]+'" title="'+textsUsual[i]+'" /></div>';
 		}
 
 		for(var i=0; i<textsLabels.length; i++){
-			divString += '<div class="menuitem labels" onclick="document.location.hash=\'tl/'+commandsLabels[i]+'\'" title="'+textsLabels[i]+'" style="background-color:'+((colors[i]===undefined)?'#777777':colors[i])+'"></div>';
+			divString += '<div class="menuitem labels labC'+i+'" title="'+textsLabels[i]+'" style="background-color:'+((colors[i]===undefined)?'#777777':colors[i])+'"></div>';
 		}
 
 		divString += '</div>';
@@ -391,7 +391,7 @@
 		var divString = '<div id="menu">';
 
 		for(var i=0; i<textsUsual.length; i++){
-			divString += '<div class="menuitem usual" onclick="document.location.hash=\'tl/'+commandsUsual[i]+'\'"><img src="'+icons[i]+'" title="'+textsUsual[i]+' '+unreadUsual[i]+'" /></div>';
+			divString += '<div class="menuitem usual usuC'+i+'"><img src="'+icons[i]+'" title="'+textsUsual[i]+' '+unreadUsual[i]+'" /></div>';
 		}
 		divString += '</div>';
 		var div = document.createElement('div');
@@ -402,6 +402,42 @@
 			menuDiv.remove();
 		}
 		parent.prepend(div.firstChild);
+	}
+
+	/**
+	 * Change the Hash to change the folder
+	 */
+	function GoTo(label){
+		document.location.hash='tl/'+label;
+	}
+
+	/**
+	 * Add event listener for the menu
+	 */
+	function CreateMenuActions(){
+		for(var i=0; i<textsUsual.length; i++){
+			var el = document.querySelector('.usuC'+i);
+			el.commandTarget = textsUsual[i];
+			el.addEventListener('click', function(e){
+				var target = e.target.commandTarget;
+				if(target === undefined){
+					target = e.path[1].commandTarget;
+				}
+				GoTo(target);
+			});
+		}
+
+		for(var i=0; i<commandsLabels.length; i++){
+			var el = document.querySelector('.labC'+i);
+			el.commandTarget = commandsLabels[i];
+			el.addEventListener('click', function(e){
+				var target = e.target.commandTarget;
+				if(target === undefined){
+					target = e.path[1].commandTarget;
+				}
+				GoTo(target);
+			});
+		}
 	}
 
 	/**
@@ -420,7 +456,14 @@
 	function CreateNewMailTab(){
 		var el = document.querySelector(newMailButton_class);
 		var elClone = el.cloneNode(true);
-		elClone.setAttribute("onclick", "if(event.ctrlKey){window.open('https://mail.google.com/mail/?view=cm&fs=1&tf=1', '_blank');event.stopPropagation();}else{_e(event, 'wa')}");
+		elClone.addEventListener('click', function(e){
+			if(event.ctrlKey){
+				window.open('https://mail.google.com/mail/?view=cm&fs=1&tf=1', '_blank');
+				vent.stopPropagation();
+			}else{
+				_e(event, 'wa');
+			}
+		});
 		elClone.title = titleTextNewMailButton;
 		el.parentNode.replaceChild(elClone, el);
 	}
@@ -430,7 +473,11 @@
 	*/
 	function AddExternalLink(){
 		var div = document.createElement('div');
-		div.innerHTML = '<div class="M j T b hc  an Nm" id="external" onclick="var mailID = window.location.href.split(\'/\').slice(-1).pop();window.open(\'https://mail.google.com/mail/u/0/#inbox/\'+mailID, \'_blank\');" role="button" aria-label="Open in new tab" title="'+titleTextOpenInNewTabButton+'" tabindex="0"><div class="V j Wc external"></div></div>';
+		div.innerHTML = '<div class="M j T b hc  an Nm" id="external" role="button" aria-label="Open in new tab" title="'+titleTextOpenInNewTabButton+'" tabindex="0"><div class="V j Wc external"></div></div>';
+		div.firstChild.addEventListener('click', function(e){
+			var mailID = window.location.href.split('/').slice(-1).pop();
+			window.open('https://mail.google.com/mail/u/0/#inbox/'+mailID, '_blank');
+		});
 
 		var parent = document.querySelector(mailToolboxBar_class);
 		while(parent === undefined){
@@ -458,7 +505,11 @@
 		var test = document.getElementsByClassName("external")[0];
 		if(test === undefined && window.location.hash.split('/')[0] == "#cv"){
 			var div = document.createElement('div');
-			div.innerHTML = '<div class="M j T b hc  an Nm" id="external" onclick="var mailID = window.location.href.split(\'/\').slice(-1).pop();window.open(\'https://mail.google.com/mail/u/0/#inbox/\'+mailID, \'_blank\');" role="button" aria-label="Open in new tab" title="'+titleTextOpenInNewTabButton+'" tabindex="0"><div class="V j Wc external"></div></div>';
+			div.innerHTML = '<div class="M j T b hc  an Nm" id="external" role="button" aria-label="Open in new tab" title="'+titleTextOpenInNewTabButton+'" tabindex="0"><div class="V j Wc external"></div></div>';
+			div.firstChild.addEventListener('click', function(e){
+				var mailID = window.location.href.split('/').slice(-1).pop();
+				window.open('https://mail.google.com/mail/u/0/#inbox/'+mailID, '_blank');
+			});
 
 			var parent = document.querySelector(mailToolboxBar_class);
 			parent.prepend(div.firstChild);
@@ -470,11 +521,11 @@
 	*/
 	function CreateBackAndForth(){
 		var div1 = document.createElement('div');
-		div1.innerHTML = '<div class="M T realarrows arrows arrowleft" onclick="var pressthiskey=\'k\'; var e = new Event(\'keypress\'); e.key=pressthiskey; e.keyCode=e.key.charCodeAt(0); e.which=e.keyCode; e.altKey=false; e.ctrlKey=false; e.shiftKey=false; e.metaKey=false; e.bubbles=true; document.dispatchEvent(e);" title="'+titleTextMoreRecentMailButton+'"></div>';
+		div1.innerHTML = '<div class="M T realarrows arrows arrowleft" title="'+titleTextMoreRecentMailButton+'"></div>';
 		var divIn = document.createElement('div');
 		divIn.innerHTML = '<div class="M T arrows messageCount" ></div>';
 		var div2 = document.createElement('div');
-		div2.innerHTML = '<div class="M T realarrows arrows arrowright" onclick="var pressthiskey=\'j\'; var e = new Event(\'keypress\'); e.key=pressthiskey; e.keyCode=e.key.charCodeAt(0); e.which=e.keyCode; e.altKey=false; e.ctrlKey=false; e.shiftKey=false; e.metaKey=false; e.bubbles=true; document.dispatchEvent(e);" title="'+titleTextOlderMailButton+'"></div>';
+		div2.innerHTML = '<div class="M T realarrows arrows arrowright" title="'+titleTextOlderMailButton+'"></div>';
 
 
 		var nodes = document.querySelectorAll(backButtonsInMailView_class);
@@ -495,6 +546,34 @@
 			}
 		}
 	}
+
+    function clickHandlerBack(element) {
+        var pressthiskey='k';
+        var e = new Event('keypress');
+        e.key=pressthiskey;
+        e.keyCode=e.key.charCodeAt(0);
+        e.which=e.keyCode;
+        e.altKey=false;
+        e.ctrlKey=false;
+        e.shiftKey=false;
+        e.metaKey=false;
+        e.bubbles=true;
+        document.dispatchEvent(e);
+    }
+
+    function clickHandlerForth(element) {
+        var pressthiskey='j';
+        var e = new Event('keypress');
+        e.key=pressthiskey;
+        e.keyCode=e.key.charCodeAt(0);
+        e.which=e.keyCode;
+        e.altKey=false;
+        e.ctrlKey=false;
+        e.shiftKey=false;
+        e.metaKey=false;
+        e.bubbles=true;
+        document.dispatchEvent(e);
+    }
 
 	/**
 	* Adds message count between the arrows in mail view
@@ -598,6 +677,7 @@
 
 				InitStaticMenu();
 				CreateStaticMenu();
+				CreateMenuActions();
 
 			}, 100);
 		}
@@ -625,6 +705,7 @@
 			clearInterval(interval2);
 
 			CreateStaticMenu();
+			CreateMenuActions();
 
 		}, 100);
 
@@ -635,6 +716,8 @@
 			clearInterval(interval3);
 
 			CreateBackAndForth();
+			document.querySelector('.arrowleft').addEventListener('click', clickHandlerBack);
+			document.querySelector('.arrowright').addEventListener('click', clickHandlerForth);
 
 		}, 100);
 	}
