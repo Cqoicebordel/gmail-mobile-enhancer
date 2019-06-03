@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name           Gmail Mobile Enhancer
 // @description    A few enhancement on the Gmail mobile site to use it as desktop.
-// @version        1.16
-// @date           2019-04-23
+// @version        1.17
+// @date           2019-06-03
 // @author         Cqoicebordel
 // @namespace      http://www.cqoicebordel.net/gmail-mobile-enhancer
 // @include        http://mail.google.com/mail/mu/*
@@ -50,12 +50,14 @@
 	***************************************/
 
 	var css = [
-	// Narrow the list of mails
+	// Translate the buttons to avoid occulting other buttons
 		".Dh{padding: 0 6px !important;min-height: 0 !important;}",
 	// Dark mode
 		"body{filter: invert(85%);}",
 	// Protect from dark mode
-		".Pg, .Sl, .cl, .gb_vc .gb_xc, .gb_mc, .Ke, .gbii, .qh.Qi:not(.Fh), .gbip,.Kn, .cr, .zq, .sm.sj, .realarrows, .labels, img{filter: invert(100%) !important;}",
+	// .Pg = #tl_ > div > div > div > div[role='listitem'] > div > div > span[style]
+	// .Sl
+		".Qg, .dl, .gb_vc .gb_xc, .gb_mc, .Le, .gbii, .rh.Ri:not(.Fh), .gbip, .Mn, .cr, .zq, .tm, .realarrows, .labels, img{filter: invert(100%) !important;}", //".Pg, .Sl, .cl, .gb_vc .gb_xc, .gb_mc, .Ke, .gbii, .qh.Qi:not(.Fh), .gbip,.Kn, .cr, .zq, .sm.sj, .realarrows, .labels, img{filter: invert(100%) !important;}",
 	// Reduce height of the empty bar at the top
 		"#gba{height: 40px !important;}",
 	// Second bar of the UI can go over the buttons
@@ -63,19 +65,18 @@
 	// Change background if the page doesn't go all the way down
 		"html{background-color: #262626 !important;}",
 	// Enhance the unreads
-		".xm .Ml, .xm .Nl  {font-style: italic !important;font-weight: bold !important;}",
-		".xm .Nl {font-weight: bold !important;}",
+		".ym .Nl, .ym .Ol  {font-style: italic !important;font-weight: bold !important;}",
 	// Enhance the reads
-		".rm .Ml{color: #333;}",
+		".sm .Nl{color: #333;}",
 	// Margins of arrows
 		".arrows{margin: 1px 6px; width: 20px; height: 20px; vertical-align: text-top; }",
 		".arrowleft{background-image:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAQAAAAngNWGAAAAKklEQVR4AWMY9uA/7/8d/y2JUXbs////NcQpa6aTMkyFA6u0hvgAH74AALYNOnGv1Wh5AAAAAElFTkSuQmCC)}",
 		".arrowright{background-image:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAQAAAAngNWGAAAAK0lEQVR4AWMYxuC/5f8d/3mJUVjz////Y8QpbR5ApQiFdFSGCB5iA3y4AwCbRTpxjexg8AAAAABJRU5ErkJggg==)}",
 	// Bold date of unread mail
-		".xm .ek {font-weight: bold; !important}",
-		".pi{color:#007b35cc !important;}",
+		".ym .fk {font-weight: bold; !important}",
+		//".pi{color:#007b35cc !important;}",
 	// Give space for the left vertical menu
-		".Im{margin-left: 42px;}",
+		".Jm{margin-left: 42px;}",
 	// Position the menu
 		"#menu{float:left; width:42px;}",
 	// Use img for usual buttons
@@ -89,11 +90,12 @@
 	// Reduce the header height
 		".gb_mg>.gb_R, .gb_eg>.gb_R,.gb_eg{line-height:38px !important;height:40px !important;}",
 		".gb_mg{height:40px !important;}",
-		".zh{padding-top:10px !important;}",
-		".zh .sj {margin-top: 0px !important;}",
+		".Ah{padding-top:10px !important;}",
+		".Ah .sj {margin-top: 0px !important;}",
 		".rj {margin-top: -10px !important;}",
+        "span[role=heading]>span {user-select: text !important;}",
 	// Subject line when in mail view
-		".nj, .oj{font-size:20px !important;font-weight: bold !important;}",
+		".pj, .qj{font-size:20px !important;font-weight: bold !important;}",
 	// Add external link to open mail in Gmail classic
 		".external{-webkit-background-size: 24px 24px !important; background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAMAAABg3Am1AAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAAVUExURQAAAGBgYGFhYWNjY2FhYWBgYGFhYfUIR/gAAAAGdFJOUwA9rhncf2Rja9EAAADkSURBVEjH1ZVJEoUgDAXJgPc/8scBJSED7r5vY5V2Q0IhlPK9gEiKE28iTNn4mwq8nKELgGwEDOMQQA8zflQGWHXK6aUB1wuuRqw+mlDbo4adoxSajyFfZUmULW5Vfe0t0zKfC51HXhNuvq9VIjx8X91YGPnLCAXJnwYFguabAVR8YeafX4Re8J7g8o7g87YQ8KYQ8ZageNwYQgHU+Gr/z8K1ze56UuE0nvpzYTeGfheEQuOpsCKI/L+QnkuggbbonB2U085BtyjC+eg9dgI6sS424i0MgzmtG7Ncql5JNb+av5cfhQIO95cXPYkAAAAASUVORK5CYII=);}"
 	].join("\n");
@@ -118,25 +120,25 @@
 
 	// Var to identify class or id. Google can change them often, so putting them here is helpful
 	// <div class="Og" data-onclick="j">Réception<span class="Yl">6</span></div>
-	var numberOfUnreadSpan_class = "Yl";
+	var numberOfUnreadSpan_class = "Zl"; // Yl
 	// <div class="Tk ec" tabindex="0" role="menuitem" onclick="_e(event, 'Wb','^i')"><div class="bl undefined"></div><div class="Nk"></div><span>Réception</span></div> .Uk
 	var listOfUsualInMenu_class = "#mn_ > div > div > div > div[role='menuitem']";
 	// <div class="Uk gl "><div onclick="_e(event, 'Xb','label1')" class="fl">
-	var listOfLabelsInMenu_class = "Vk";
+	var listOfLabelsInMenu_class = "Wk"; // Vk
 	// <div class="bl " style="background:#FFC8AF;color:#7A2E0B">&nbsp;</div>
-	var ListOfLabelsPatchOfColorInMenu_class = "cl";
+	var ListOfLabelsPatchOfColorInMenu_class = "dl"; //cl
 	// <div class="Og ec" onclick="_e(event, 'Wb','label2')"><div class="Nk"></div><span>Label 2</span></div>
-	var ListOfLabelsActionTextInMenu_class = "Og";
+	var ListOfLabelsActionTextInMenu_class = "Pg"; //Og
 	// <div id="tl_" class=" Wg  " style="">
 	var mainTimeline_id = "tl_";
 	// <div class="Yg" style="bottom: 0px;"><div id="menu">
 	var parentOfTheMenu_class = "#tl_ > div:nth-child(1)";
 	// <div class="M j T b hc Pm  Ke" onclick="_e(event, 'wa')" role="button" aria-label="Nouveau message" tabindex="0"><div class="V j od"></div></div>
-	var newMailButton_class = "#tltbt > div > div.M.j.T.b.hc.Qm.Ke";
+	var newMailButton_class = "#tltbt > div > div.M.j.T.b.hc.Rm.Le";
 	// <div class="us Jm" style="">
-	var mailToolboxBar_class = "#views > div > div.ws.Km";
+	var mailToolboxBar_class = "#views > div > div.xs.Lm"; //ws.Km
 	// <div class="kc">
-	var backButtonsInMailView_class = "#cv__cntbt > div.kc, #cv__cntbb > div.kc";
+	var backButtonsInMailView_class = "#cv__cntbt > div.kc, #cv__cntbb > div.kc"; // #cv__cntbt > div.kc, #cv__cntbb > div.kc
 	// <div class="jm" role="list"> .km
 	var mainListOfMail_class = "#tl_ > div > div > div[role='list']";
 	// <div class="fc Im Vm Rc qc Sc" id="tltbt" style="width: 100%;">
@@ -459,7 +461,7 @@
 		elClone.addEventListener('click', function(e){
 			if(event.ctrlKey){
 				window.open('https://mail.google.com/mail/?view=cm&fs=1&tf=1', '_blank');
-				vent.stopPropagation();
+				event.stopPropagation();
 			}else{
 				_e(event, 'wa');
 			}
