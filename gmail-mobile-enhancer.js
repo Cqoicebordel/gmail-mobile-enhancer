@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name           Gmail Mobile Enhancer
 // @description    A few enhancement on the Gmail mobile site to use it as desktop.
-// @version        1.17
-// @date           2019-06-03
+// @version        1.18
+// @date           2019-06-04
 // @author         Cqoicebordel
 // @namespace      http://www.cqoicebordel.net/gmail-mobile-enhancer
 // @include        http://mail.google.com/mail/mu/*
@@ -57,7 +57,7 @@
 	// Protect from dark mode
 	// .Pg = #tl_ > div > div > div > div[role='listitem'] > div > div > span[style]
 	// .Sl
-		".Qg, .dl, .gb_vc .gb_xc, .gb_mc, .Le, .gbii, .rh.Ri:not(.Fh), .gbip, .Mn, .cr, .zq, .tm, .realarrows, .labels, img{filter: invert(100%) !important;}", //".Pg, .Sl, .cl, .gb_vc .gb_xc, .gb_mc, .Ke, .gbii, .qh.Qi:not(.Fh), .gbip,.Kn, .cr, .zq, .sm.sj, .realarrows, .labels, img{filter: invert(100%) !important;}",
+		".Qg, .dl, .gb_vc .gb_xc, .gb_mc, .Le, .gbii, .rh.Ri:not(.Fh), .gbip, .Mn, .cr, .zq, .tm, .realarrows, .labels, img{filter: invert(100%) !important;}",
 	// Reduce height of the empty bar at the top
 		"#gba{height: 40px !important;}",
 	// Second bar of the UI can go over the buttons
@@ -86,16 +86,15 @@
 	// Bigger help background
 		".Dw{min-height: 700px;}",
 	// Allow full text of labels stickers
-		".Pg{max-width:none !important;}",
+		".Qg{max-width:none !important;}",
 	// Reduce the header height
 		".gb_mg>.gb_R, .gb_eg>.gb_R,.gb_eg{line-height:38px !important;height:40px !important;}",
 		".gb_mg{height:40px !important;}",
 		".Ah{padding-top:10px !important;}",
 		".Ah .sj {margin-top: 0px !important;}",
 		".rj {margin-top: -10px !important;}",
-        "span[role=heading]>span {user-select: text !important;}",
 	// Subject line when in mail view
-		".pj, .qj{font-size:20px !important;font-weight: bold !important;}",
+		"span[role=heading]>span {font-size:20px !important;font-weight: bold !important;user-select: text !important;}",
 	// Add external link to open mail in Gmail classic
 		".external{-webkit-background-size: 24px 24px !important; background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAMAAABg3Am1AAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAAVUExURQAAAGBgYGFhYWNjY2FhYWBgYGFhYfUIR/gAAAAGdFJOUwA9rhncf2Rja9EAAADkSURBVEjH1ZVJEoUgDAXJgPc/8scBJSED7r5vY5V2Q0IhlPK9gEiKE28iTNn4mwq8nKELgGwEDOMQQA8zflQGWHXK6aUB1wuuRqw+mlDbo4adoxSajyFfZUmULW5Vfe0t0zKfC51HXhNuvq9VIjx8X91YGPnLCAXJnwYFguabAVR8YeafX4Re8J7g8o7g87YQ8KYQ8ZageNwYQgHU+Gr/z8K1ze56UuE0nvpzYTeGfheEQuOpsCKI/L+QnkuggbbonB2U085BtyjC+eg9dgI6sS424i0MgzmtG7Ncql5JNb+av5cfhQIO95cXPYkAAAAASUVORK5CYII=);}"
 	].join("\n");
@@ -124,9 +123,9 @@
 	// <div class="Tk ec" tabindex="0" role="menuitem" onclick="_e(event, 'Wb','^i')"><div class="bl undefined"></div><div class="Nk"></div><span>Réception</span></div> .Uk
 	var listOfUsualInMenu_class = "#mn_ > div > div > div > div[role='menuitem']";
 	// <div class="Uk gl "><div onclick="_e(event, 'Xb','label1')" class="fl">
-	var listOfLabelsInMenu_class = "Wk"; // Vk
-	// <div class="bl " style="background:#FFC8AF;color:#7A2E0B">&nbsp;</div>
-	var ListOfLabelsPatchOfColorInMenu_class = "dl"; //cl
+	var listOfLabelsInMenu_class = "Wk";
+	// <div class="dl " style="background:#FFC8AF;color:#7A2E0B">&nbsp;</div>
+	var ListOfLabelsPatchOfColorInMenu_class = "dl";
 	// <div class="Og ec" onclick="_e(event, 'Wb','label2')"><div class="Nk"></div><span>Label 2</span></div>
 	var ListOfLabelsActionTextInMenu_class = "Pg"; //Og
 	// <div id="tl_" class=" Wg  " style="">
@@ -136,9 +135,9 @@
 	// <div class="M j T b hc Pm  Ke" onclick="_e(event, 'wa')" role="button" aria-label="Nouveau message" tabindex="0"><div class="V j od"></div></div>
 	var newMailButton_class = "#tltbt > div > div.M.j.T.b.hc.Rm.Le";
 	// <div class="us Jm" style="">
-	var mailToolboxBar_class = "#views > div > div.xs.Lm"; //ws.Km
+	var mailToolboxBar_class = "#views > div > div.xs.Lm";
 	// <div class="kc">
-	var backButtonsInMailView_class = "#cv__cntbt > div.kc, #cv__cntbb > div.kc"; // #cv__cntbt > div.kc, #cv__cntbb > div.kc
+	var backButtonsInMailView_class = "#cv__cntbt > div.kc, #cv__cntbb > div.kc";
 	// <div class="jm" role="list"> .km
 	var mainListOfMail_class = "#tl_ > div > div > div[role='list']";
 	// <div class="fc Im Vm Rc qc Sc" id="tltbt" style="width: 100%;">
@@ -475,7 +474,7 @@
 	*/
 	function AddExternalLink(){
 		var div = document.createElement('div');
-		div.innerHTML = '<div class="M j T b hc  an Nm" id="external" role="button" aria-label="Open in new tab" title="'+titleTextOpenInNewTabButton+'" tabindex="0"><div class="V j Wc external"></div></div>';
+		div.innerHTML = '<div class="M j T b hc  bn Om" id="external" role="button" aria-label="Open in new tab" title="'+titleTextOpenInNewTabButton+'" tabindex="0"><div class="V j Wc external"></div></div>';
 		div.firstChild.addEventListener('click', function(e){
 			var mailID = window.location.href.split('/').slice(-1).pop();
 			window.open('https://mail.google.com/mail/u/0/#inbox/'+mailID, '_blank');
@@ -507,7 +506,7 @@
 		var test = document.getElementsByClassName("external")[0];
 		if(test === undefined && window.location.hash.split('/')[0] == "#cv"){
 			var div = document.createElement('div');
-			div.innerHTML = '<div class="M j T b hc  an Nm" id="external" role="button" aria-label="Open in new tab" title="'+titleTextOpenInNewTabButton+'" tabindex="0"><div class="V j Wc external"></div></div>';
+			div.innerHTML = '<div class="M j T b hc  bn Om" id="external" role="button" aria-label="Open in new tab" title="'+titleTextOpenInNewTabButton+'" tabindex="0"><div class="V j Wc external"></div></div>';
 			div.firstChild.addEventListener('click', function(e){
 				var mailID = window.location.href.split('/').slice(-1).pop();
 				window.open('https://mail.google.com/mail/u/0/#inbox/'+mailID, '_blank');
