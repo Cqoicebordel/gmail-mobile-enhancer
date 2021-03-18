@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name           Gmail Mobile Enhancer
 // @description    A few enhancement on the Gmail mobile site to use it as desktop.
-// @version        1.18
-// @date           2019-06-04
+// @version        1.20
+// @date           2021-03-18
 // @author         Cqoicebordel
 // @namespace      http://www.cqoicebordel.net/gmail-mobile-enhancer
 // @include        http://mail.google.com/mail/mu/*
@@ -57,26 +57,32 @@
 	// Protect from dark mode
 	// .Pg = #tl_ > div > div > div > div[role='listitem'] > div > div > span[style]
 	// .Sl
-		".Qg, .dl, .gb_vc .gb_xc, .gb_mc, .Le, .gbii, .rh.Ri:not(.Fh), .gbip, .Mn, .cr, .zq, .tm, .realarrows, .labels, img{filter: invert(100%) !important;}",
+		".Kf, .if, .zm, .wj, .messageCount, .Hl, .gb_vc .gb_xc, .gb_mc, .Le, .gbii, .rh.Ri:not(.Fh), .gbip, .Mn, .cr, .zq, .tm, .realarrows, #cvcstar, .labels, img{filter: invert(100%) !important;}",
 	// Reduce height of the empty bar at the top
 		"#gba{height: 40px !important;}",
 	// Second bar of the UI can go over the buttons
-		".zc{    left: 200px !important;padding-right: 200px !important;}",
+		".zc{left: 200px !important;padding-right: 200px !important;}",
 	// Change background if the page doesn't go all the way down
 		"html{background-color: #262626 !important;}",
 	// Enhance the unreads
-		".ym .Nl, .ym .Ol  {font-style: italic !important;font-weight: bold !important;}",
-	// Enhance the reads
-		".sm .Nl{color: #333;}",
+		".Sk .Kk, .Sk .Lk  {font-style: italic !important;font-weight: bold !important;}",
+	// Enhance the reads //div.Xf.Sk > div.Kk - div.Xf.Mk > div.Lk
+		".Mk .Kk{color: #DDD;filter: invert(1);}",
+    // Reinvert to have the emoji in from, subject, and snippet
+        ".Sk .Kk b {color: #F9F9F9;filter: invert(1);}",
+        ".Sk .Lk span {filter: invert(1);color: #FFF;}",
+        ".Sk .Lk span, .Gk {filter: invert(1);color: #888;}",
+        ".gk{z-index:10;}",
 	// Margins of arrows
 		".arrows{margin: 1px 6px; width: 20px; height: 20px; vertical-align: text-top; }",
+        ".messageCount{width:auto}",
 		".arrowleft{background-image:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAQAAAAngNWGAAAAKklEQVR4AWMY9uA/7/8d/y2JUXbs////NcQpa6aTMkyFA6u0hvgAH74AALYNOnGv1Wh5AAAAAElFTkSuQmCC)}",
 		".arrowright{background-image:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAQAAAAngNWGAAAAK0lEQVR4AWMYxuC/5f8d/3mJUVjz////Y8QpbR5ApQiFdFSGCB5iA3y4AwCbRTpxjexg8AAAAABJRU5ErkJggg==)}",
 	// Bold date of unread mail
-		".ym .fk {font-weight: bold; !important}",
+		".Sk .yi {font-weight: bold; !important}",
 		//".pi{color:#007b35cc !important;}",
 	// Give space for the left vertical menu
-		".Jm{margin-left: 42px;}",
+		".dl{margin-left: 42px;}",
 	// Position the menu
 		"#menu{float:left; width:42px;}",
 	// Use img for usual buttons
@@ -86,7 +92,7 @@
 	// Bigger help background
 		".Dw{min-height: 700px;}",
 	// Allow full text of labels stickers
-		".Qg{max-width:none !important;}",
+		".if{max-width:none !important;}",
 	// Reduce the header height
 		".gb_mg>.gb_R, .gb_eg>.gb_R,.gb_eg{line-height:38px !important;height:40px !important;}",
 		".gb_mg{height:40px !important;}",
@@ -94,7 +100,7 @@
 		".Ah .sj {margin-top: 0px !important;}",
 		".rj {margin-top: -10px !important;}",
 	// Subject line when in mail view
-		"span[role=heading]>span {font-size:20px !important;font-weight: bold !important;user-select: text !important;}",
+		"span[role=heading]>span {font-size:20px !important;font-weight: bold !important;user-select: text !important;color: #DDD;filter: invert(1);}",
 	// Add external link to open mail in Gmail classic
 		".external{-webkit-background-size: 24px 24px !important; background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAMAAABg3Am1AAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAAVUExURQAAAGBgYGFhYWNjY2FhYWBgYGFhYfUIR/gAAAAGdFJOUwA9rhncf2Rja9EAAADkSURBVEjH1ZVJEoUgDAXJgPc/8scBJSED7r5vY5V2Q0IhlPK9gEiKE28iTNn4mwq8nKELgGwEDOMQQA8zflQGWHXK6aUB1wuuRqw+mlDbo4adoxSajyFfZUmULW5Vfe0t0zKfC51HXhNuvq9VIjx8X91YGPnLCAXJnwYFguabAVR8YeafX4Re8J7g8o7g87YQ8KYQ8ZageNwYQgHU+Gr/z8K1ze56UuE0nvpzYTeGfheEQuOpsCKI/L+QnkuggbbonB2U085BtyjC+eg9dgI6sS424i0MgzmtG7Ncql5JNb+av5cfhQIO95cXPYkAAAAASUVORK5CYII=);}"
 	].join("\n");
@@ -119,25 +125,25 @@
 
 	// Var to identify class or id. Google can change them often, so putting them here is helpful
 	// <div class="Og" data-onclick="j">Réception<span class="Yl">6</span></div>
-	var numberOfUnreadSpan_class = "Zl"; // Yl
+	var numberOfUnreadSpan_class = "tk"; // Yl
 	// <div class="Tk ec" tabindex="0" role="menuitem" onclick="_e(event, 'Wb','^i')"><div class="bl undefined"></div><div class="Nk"></div><span>Réception</span></div> .Uk
 	var listOfUsualInMenu_class = "#mn_ > div > div > div > div[role='menuitem']";
 	// <div class="Uk gl "><div onclick="_e(event, 'Xb','label1')" class="fl">
-	var listOfLabelsInMenu_class = "Wk";
-	// <div class="dl " style="background:#FFC8AF;color:#7A2E0B">&nbsp;</div>
-	var ListOfLabelsPatchOfColorInMenu_class = "dl";
-	// <div class="Og ec" onclick="_e(event, 'Wb','label2')"><div class="Nk"></div><span>Label 2</span></div>
-	var ListOfLabelsActionTextInMenu_class = "Pg"; //Og
+	var listOfLabelsInMenu_class = "pj";
+	// <div class="wj " style="background:#FFC8AF;color:#7A2E0B">&nbsp;</div>
+	var ListOfLabelsPatchOfColorInMenu_class = "wj";
+	// <div class="hf Vp" onclick="_e(event, 'Wb','label2')"><div class="ij"></div><span>Label 2</span></div>
+	var ListOfLabelsActionTextInMenu_class = "Vp"; //Og
 	// <div id="tl_" class=" Wg  " style="">
 	var mainTimeline_id = "tl_";
 	// <div class="Yg" style="bottom: 0px;"><div id="menu">
 	var parentOfTheMenu_class = "#tl_ > div:nth-child(1)";
 	// <div class="M j T b hc Pm  Ke" onclick="_e(event, 'wa')" role="button" aria-label="Nouveau message" tabindex="0"><div class="V j od"></div></div>
-	var newMailButton_class = "#tltbt > div > div.M.j.T.b.hc.Rm.Le";
+	var newMailButton_class = "#tltbt > div > div.Gl.d.Pp.Ze.nm.ol.Sb";
 	// <div class="us Jm" style="">
-	var mailToolboxBar_class = "#views > div > div.xs.Lm";
+	var mailToolboxBar_class = "#views > div > div.xs.fl";
 	// <div class="kc">
-	var backButtonsInMailView_class = "#cv__cntbt > div.kc, #cv__cntbb > div.kc";
+	var backButtonsInMailView_class = "#cv__cntbt > div.Il, #cv__cntbb > div.Il";
 	// <div class="jm" role="list"> .km
 	var mainListOfMail_class = "#tl_ > div > div > div[role='list']";
 	// <div class="fc Im Vm Rc qc Sc" id="tltbt" style="width: 100%;">
@@ -506,7 +512,7 @@
 		var test = document.getElementsByClassName("external")[0];
 		if(test === undefined && window.location.hash.split('/')[0] == "#cv"){
 			var div = document.createElement('div');
-			div.innerHTML = '<div class="M j T b hc  bn Om" id="external" role="button" aria-label="Open in new tab" title="'+titleTextOpenInNewTabButton+'" tabindex="0"><div class="V j Wc external"></div></div>';
+			div.innerHTML = '<div class="Gl d Pp Ze nm  Cl kl" id="external" role="button" aria-label="Open in new tab" title="'+titleTextOpenInNewTabButton+'" tabindex="0"><div class="il d a external"></div></div>';
 			div.firstChild.addEventListener('click', function(e){
 				var mailID = window.location.href.split('/').slice(-1).pop();
 				window.open('https://mail.google.com/mail/u/0/#inbox/'+mailID, '_blank');
@@ -522,11 +528,11 @@
 	*/
 	function CreateBackAndForth(){
 		var div1 = document.createElement('div');
-		div1.innerHTML = '<div class="M T realarrows arrows arrowleft" title="'+titleTextMoreRecentMailButton+'"></div>';
+		div1.innerHTML = '<div class="Gl d realarrows arrows arrowleft" title="'+titleTextMoreRecentMailButton+'"></div>';
 		var divIn = document.createElement('div');
-		divIn.innerHTML = '<div class="M T arrows messageCount" ></div>';
+		divIn.innerHTML = '<div class="Gl d arrows messageCount" ></div>';
 		var div2 = document.createElement('div');
-		div2.innerHTML = '<div class="M T realarrows arrows arrowright" title="'+titleTextOlderMailButton+'"></div>';
+		div2.innerHTML = '<div class="Gl d realarrows arrows arrowright" title="'+titleTextOlderMailButton+'"></div>';
 
 
 		var nodes = document.querySelectorAll(backButtonsInMailView_class);
@@ -734,3 +740,4 @@
 	CheckHash();
 
 }());
+
