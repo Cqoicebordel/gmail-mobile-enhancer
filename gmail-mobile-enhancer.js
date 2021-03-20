@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name           Gmail Mobile Enhancer
 // @description    A few enhancement on the Gmail mobile site to use it as desktop.
-// @version        1.20
-// @date           2021-03-18
+// @version        1.21
+// @date           2021-03-20
 // @author         Cqoicebordel
 // @namespace      http://www.cqoicebordel.net/gmail-mobile-enhancer
 // @include        http://mail.google.com/mail/mu/*
@@ -55,34 +55,41 @@
 	// Dark mode
 		"body{filter: invert(85%);}",
 	// Protect from dark mode
-	// .Pg = #tl_ > div > div > div > div[role='listitem'] > div > div > span[style]
-	// .Sl
-		".Kf, .if, .zm, .wj, .messageCount, .Hl, .gb_vc .gb_xc, .gb_mc, .Le, .gbii, .rh.Ri:not(.Fh), .gbip, .Mn, .cr, .zq, .tm, .realarrows, #cvcstar, .labels, img{filter: invert(100%) !important;}",
+		".Qg,", // Labels
+		".dl,", // Patch of colors in menu of labels // div[data-onclick-arg=client] > div
+		".messageCount,",
+		".Le,", // New mail button // Last of #tltbt > div:nth-child(4n) > div
+		".rh.Ri,", // Avatar of correspondant in mail view //
+		".Ln,", // Submenu of the toolbar in mail view // #views > div > div:nth-child(1) > div:nth-child(5)
+		".realarrows,",
+		"#cvcstar,", // Star in mail view
+		".labels,",
+		"img{filter: invert(100%) !important;}",
 	// Reduce height of the empty bar at the top
 		"#gba{height: 40px !important;}",
 	// Second bar of the UI can go over the buttons
 		".zc{left: 200px !important;padding-right: 200px !important;}",
 	// Change background if the page doesn't go all the way down
 		"html{background-color: #262626 !important;}",
-	// Enhance the unreads
-		".Sk .Kk, .Sk .Lk  {font-style: italic !important;font-weight: bold !important;}",
+	// Enhance the unreads // div[role=listitem]
+		".ym .qm, .ym .rm  {font-style: italic !important;font-weight: bold !important;}",
 	// Enhance the reads //div.Xf.Sk > div.Kk - div.Xf.Mk > div.Lk
-		".Mk .Kk{color: #DDD;filter: invert(1);}",
+		".sm .qm{color: #DDD;filter: invert(1);}",
     // Reinvert to have the emoji in from, subject, and snippet
-        ".Sk .Kk b {color: #F9F9F9;filter: invert(1);}",
-        ".Sk .Lk span {filter: invert(1);color: #FFF;}",
-        ".Sk .Lk span, .Gk {filter: invert(1);color: #888;}",
-        ".gk{z-index:10;}",
+        ".ym .qm b {color: #F9F9F9;filter: invert(1);}",
+        ".ym .qm span {filter: invert(1);color: #FFF;}",
+        ".Kg {filter: invert(1);color: #888;}", // div[role=listitem]  span > span // Selector OK
+        ".Ml{z-index:10;}", // Full mail // div[role=listitem] > div:nth-child(1)
+    // Bold date of unread mail
+		".ym .fk {font-weight: bold; !important}",
 	// Margins of arrows
 		".arrows{margin: 1px 6px; width: 20px; height: 20px; vertical-align: text-top; }",
-        ".messageCount{width:auto}",
+        ".messageCount{width:auto; margin-top:2px;}",
 		".arrowleft{background-image:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAQAAAAngNWGAAAAKklEQVR4AWMY9uA/7/8d/y2JUXbs////NcQpa6aTMkyFA6u0hvgAH74AALYNOnGv1Wh5AAAAAElFTkSuQmCC)}",
 		".arrowright{background-image:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAQAAAAngNWGAAAAK0lEQVR4AWMYxuC/5f8d/3mJUVjz////Y8QpbR5ApQiFdFSGCB5iA3y4AwCbRTpxjexg8AAAAABJRU5ErkJggg==)}",
-	// Bold date of unread mail
-		".Sk .yi {font-weight: bold; !important}",
 		//".pi{color:#007b35cc !important;}",
-	// Give space for the left vertical menu
-		".dl{margin-left: 42px;}",
+	// Give space for the left vertical menu //#tl_ #menu + div // Selector OK, use second class
+		".Jm{margin-left: 42px;}",
 	// Position the menu
 		"#menu{float:left; width:42px;}",
 	// Use img for usual buttons
@@ -90,15 +97,15 @@
 	// Use colors for the labels
 		".labels{height:15px;width:24px;margin:15px 9px; border-radius:3px}",
 	// Bigger help background
-		".Dw{min-height: 700px;}",
-	// Allow full text of labels stickers
-		".if{max-width:none !important;}",
+//		".Dw{min-height: 700px;}",
+	// Allow full text of labels stickers // div[role=listitem] > div[aria-hidden=true] > div > span // Selector OK
+		".Qg{max-width:none !important;}",
 	// Reduce the header height
-		".gb_mg>.gb_R, .gb_eg>.gb_R,.gb_eg{line-height:38px !important;height:40px !important;}",
-		".gb_mg{height:40px !important;}",
-		".Ah{padding-top:10px !important;}",
-		".Ah .sj {margin-top: 0px !important;}",
-		".rj {margin-top: -10px !important;}",
+//		".gb_mg>.gb_R, .gb_eg>.gb_R,.gb_eg{line-height:38px !important;height:40px !important;}",
+//		".gb_mg{height:40px !important;}",
+		".Ah{padding-top:10px !important;}", // Title of mail in mail view
+		".Ah .sj {margin-top: 0px !important;}", // Star, first child of above
+		".rj {margin-top: -10px !important;}", // Second child of above above
 	// Subject line when in mail view
 		"span[role=heading]>span {font-size:20px !important;font-weight: bold !important;user-select: text !important;color: #DDD;filter: invert(1);}",
 	// Add external link to open mail in Gmail classic
@@ -124,26 +131,26 @@
 
 
 	// Var to identify class or id. Google can change them often, so putting them here is helpful
-	// <div class="Og" data-onclick="j">Réception<span class="Yl">6</span></div>
-	var numberOfUnreadSpan_class = "tk"; // Yl
+	// <div class="Og" data-onclick="j">Réception<span class="Yl">6</span></div> // #tltbt > div > div > div > span
+	var numberOfUnreadSpan_class = "Zl";
 	// <div class="Tk ec" tabindex="0" role="menuitem" onclick="_e(event, 'Wb','^i')"><div class="bl undefined"></div><div class="Nk"></div><span>Réception</span></div> .Uk
 	var listOfUsualInMenu_class = "#mn_ > div > div > div > div[role='menuitem']";
 	// <div class="Uk gl "><div onclick="_e(event, 'Xb','label1')" class="fl">
-	var listOfLabelsInMenu_class = "pj";
+	var listOfLabelsInMenu_class = "Wk";
 	// <div class="wj " style="background:#FFC8AF;color:#7A2E0B">&nbsp;</div>
-	var ListOfLabelsPatchOfColorInMenu_class = "wj";
-	// <div class="hf Vp" onclick="_e(event, 'Wb','label2')"><div class="ij"></div><span>Label 2</span></div>
-	var ListOfLabelsActionTextInMenu_class = "Vp"; //Og
+	var ListOfLabelsPatchOfColorInMenu_class = "dl";
+	// <div class="Pg ec" onclick="_e(event, 'Wb','label2')"><div class="Pk"></div><span>Label 2</span></div>
+	var ListOfLabelsActionTextInMenu_class = "ec";
 	// <div id="tl_" class=" Wg  " style="">
 	var mainTimeline_id = "tl_";
 	// <div class="Yg" style="bottom: 0px;"><div id="menu">
 	var parentOfTheMenu_class = "#tl_ > div:nth-child(1)";
 	// <div class="M j T b hc Pm  Ke" onclick="_e(event, 'wa')" role="button" aria-label="Nouveau message" tabindex="0"><div class="V j od"></div></div>
-	var newMailButton_class = "#tltbt > div > div.Gl.d.Pp.Ze.nm.ol.Sb";
+	var newMailButton_class = "#tltbt > div > div.M.j.T.b.hc.Rm.Le";
 	// <div class="us Jm" style="">
-	var mailToolboxBar_class = "#views > div > div.xs.fl";
+	var mailToolboxBar_class = "#views > div > div.xs.Lm";
 	// <div class="kc">
-	var backButtonsInMailView_class = "#cv__cntbt > div.Il, #cv__cntbb > div.Il";
+	var backButtonsInMailView_class = "#cv__cntbt > div.kc, #cv__cntbb > div.kc";
 	// <div class="jm" role="list"> .km
 	var mainListOfMail_class = "#tl_ > div > div > div[role='list']";
 	// <div class="fc Im Vm Rc qc Sc" id="tltbt" style="width: 100%;">
@@ -512,7 +519,7 @@
 		var test = document.getElementsByClassName("external")[0];
 		if(test === undefined && window.location.hash.split('/')[0] == "#cv"){
 			var div = document.createElement('div');
-			div.innerHTML = '<div class="Gl d Pp Ze nm  Cl kl" id="external" role="button" aria-label="Open in new tab" title="'+titleTextOpenInNewTabButton+'" tabindex="0"><div class="il d a external"></div></div>';
+			div.innerHTML = '<div class="M j T b hc bn Om" id="external" role="button" aria-label="Open in new tab" title="'+titleTextOpenInNewTabButton+'" tabindex="0"><div class="V j Wc external"></div></div>';
 			div.firstChild.addEventListener('click', function(e){
 				var mailID = window.location.href.split('/').slice(-1).pop();
 				window.open('https://mail.google.com/mail/u/0/#inbox/'+mailID, '_blank');
@@ -528,11 +535,11 @@
 	*/
 	function CreateBackAndForth(){
 		var div1 = document.createElement('div');
-		div1.innerHTML = '<div class="Gl d realarrows arrows arrowleft" title="'+titleTextMoreRecentMailButton+'"></div>';
+		div1.innerHTML = '<div class="M j realarrows arrows arrowleft" title="'+titleTextMoreRecentMailButton+'"></div>';
 		var divIn = document.createElement('div');
-		divIn.innerHTML = '<div class="Gl d arrows messageCount" ></div>';
+		divIn.innerHTML = '<div class="M j arrows messageCount" ></div>';
 		var div2 = document.createElement('div');
-		div2.innerHTML = '<div class="Gl d realarrows arrows arrowright" title="'+titleTextOlderMailButton+'"></div>';
+		div2.innerHTML = '<div class="M j realarrows arrows arrowright" title="'+titleTextOlderMailButton+'"></div>';
 
 
 		var nodes = document.querySelectorAll(backButtonsInMailView_class);
