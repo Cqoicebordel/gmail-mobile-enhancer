@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name           Gmail Mobile Enhancer
 // @description    A few enhancement on the Gmail mobile site to use it as desktop.
-// @version        1.22
-// @date           2021-03-24
+// @version        1.23
+// @date           2021-05-10
 // @author         Cqoicebordel
 // @namespace      http://www.cqoicebordel.net/gmail-mobile-enhancer
 // @include        http://mail.google.com/mail/mu/*
@@ -149,7 +149,7 @@
 	// <div class="M j T b hc Pm  Ke" onclick="_e(event, 'wa')" role="button" aria-label="Nouveau message" tabindex="0"><div class="V j od"></div></div>
 	var newMailButton_class = "#tltbt > div > div.Gl.d.Pp.Ze.nm.ol.Sb";
 	// <div class="us Jm" style="">
-	var mailToolboxBar_class = "#views > div > div.xs.fl";
+	var mailToolboxBar_class = "#views > div > div.Cs.fl";
 	// <div class="kc">
 	var backButtonsInMailView_class = "#cv__cntbt > div.Il, #cv__cntbb > div.Il";
 	// <div class="jm" role="list"> .km
