@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name           Gmail Mobile Enhancer
 // @description    A few enhancement on the Gmail mobile site to use it as desktop.
-// @version        1.23
-// @date           2021-05-10
+// @version        1.24
+// @date           2021-06-29
 // @author         Cqoicebordel
 // @namespace      http://www.cqoicebordel.net/gmail-mobile-enhancer
 // @include        http://mail.google.com/mail/mu/*
@@ -149,7 +149,7 @@
 	// <div class="M j T b hc Pm  Ke" onclick="_e(event, 'wa')" role="button" aria-label="Nouveau message" tabindex="0"><div class="V j od"></div></div>
 	var newMailButton_class = "#tltbt > div > div.Gl.d.Pp.Ze.nm.ol.Sb";
 	// <div class="us Jm" style="">
-	var mailToolboxBar_class = "#views > div > div.Cs.fl";
+	var mailToolboxBar_class = "#views > div > div.Gs.fl";
 	// <div class="kc">
 	var backButtonsInMailView_class = "#cv__cntbt > div.Il, #cv__cntbb > div.Il";
 	// <div class="jm" role="list"> .km
@@ -486,7 +486,7 @@
 				window.open('https://mail.google.com/mail/?view=cm&fs=1&tf=1', '_blank');
 				event.stopPropagation();
 			}else{
-				_e(event, 'wa');
+				_e(event, 'tlacmp+75');
 			}
 		});
 		elClone.title = titleTextNewMailButton;
@@ -628,11 +628,11 @@
 	*/
 	function AddScrollEvents(){
 		window.addEventListener('keydown', function (e) {
-			if (e.keyCode === 33 || (e.shiftKey && e.keyCode === 32)) {
+			if (e.keyCode === 33 || (e.shiftKey && e.keyCode === 32 && e.target.tagName.toLowerCase() != "input" && !(document.activeElement.isContentEditable || document.activeElement.type == "search"))) {
 				window.scrollBy(0,-(window.innerHeight-100));
 				e.stopPropagation();
 				e.preventDefault();
-			}else if (e.keyCode === 34 || (e.keyCode === 32 && !(document.activeElement.isContentEditable || document.activeElement.type == "search"))) {
+			}else if (e.keyCode === 34 || (e.keyCode === 32 && e.target.tagName.toLowerCase() != "input" && !(document.activeElement.isContentEditable || document.activeElement.type == "search"))) {
 				window.scrollBy(0,(window.innerHeight-100));
 				e.stopPropagation();
 				e.preventDefault();
