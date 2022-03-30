@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name           Gmail Mobile Enhancer
 // @description    A few enhancement on the Gmail mobile site to use it as desktop.
-// @version        1.24
-// @date           2021-06-29
+// @version        1.25
+// @date           2022-03-30
 // @author         Cqoicebordel
 // @namespace      http://www.cqoicebordel.net/gmail-mobile-enhancer
 // @include        http://mail.google.com/mail/mu/*
