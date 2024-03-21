@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name           Gmail Mobile Enhancer
 // @description    A few enhancement on the Gmail mobile site to use it as desktop.
-// @version        1.26
-// @date           2022-04-06
+// @version        1.27
+// @date           2024-03-21
 // @author         Cqoicebordel
 // @namespace      http://www.cqoicebordel.net/gmail-mobile-enhancer
 // @include        http://mail.google.com/mail/mu/*
@@ -55,13 +55,16 @@
 	// Dark mode
 		"body{filter: invert(85%);}",
 	// Protect from dark mode
-		".if,", // Labels // div[role=listitem] > div[aria-hidden=true] > div > span
-		".wj,", // Patch of colors in menu of labels // div[data-onclick-arg=client] > div
+		"div[role='listitem'] > div > div > span[style],", // Labels // div[role="listitem"] > div > div > span[style]
+		"div[data-onclick-arg] > div[style],", // Patch of colors in menu of labels // div[data-onclick-arg] > div[style]
 		".messageCount,",
-		".Sb,", // New mail button // Last of #tltbt > div:nth-child(4n) > div
-		".Kf.kh,", // Avatar of correspondant in mail view //
-        ".Rk,", // Star in list view // div[role=listitem] > div > div[aria-label="Activer le suivi"] > div (before last)
-		".zm,", // Submenu of the toolbar in mail view // #views > div > div:nth-child(1) > div:nth-child(5)
+		"#tltbt > div:nth-child(4n) > div,", // New mail button // Last of #tltbt > div:nth-child(4n) > div
+		"#cv_ div[role='presentation'],", // Avatar of correspondant in mail view //
+        "#cv_ div span div span[style],",
+        "div[role=listitem] > div > div[aria-label='Activer le suivi'] > div,", // Star in list view // div[role=listitem] > div > div[aria-label="Activer le suivi"] > div (before last)
+		"#views > div > div:nth-child(1) > div:nth-child(5),", // Submenu of the toolbar in mail view // #views > div > div:nth-child(1) > div:nth-child(5)
+        "#views > div > div:nth-child(1) > div:not([tabindex]):has(div > div > div[data-onclick-arg] > div),", // Same as above for spams
+        ".pi,", // Warning message in a spams // div[id^=cvcfullmsg] > :nth-child(3)
 		".realarrows,",
 		"#cvcstar,", // Star in mail view
 		".labels,",
@@ -69,20 +72,24 @@
 	// Reduce height of the empty bar at the top
 		"#gba{height: 40px !important;}",
 	// Second bar of the UI can go over the buttons
-		".zc{left: 200px !important;padding-right: 200px !important;}",
+		".Bc{left: 200px !important;padding-right: 200px !important;}",
 	// Change background if the page doesn't go all the way down
 		"html{background-color: #262626 !important;}",
 	// Enhance the unreads // div[role=listitem]
-		".Sk .ik, .Sk .jk  {font-style: italic !important;font-weight: bold !important;}",
+		".Yk .nk, .Yk .ok, .Yk .pk  {font-style: italic !important;font-weight: bold !important;}",
 	// Enhance the reads //div.Xf.Sk > div.Kk - div.Xf.Mk > div.Lk
 //		".Mk .jk{color: #DDD;filter: invert(1);}",
     // Reinvert to have the emoji in from, subject, and snippet
-        ".Sk .jk b {color: #F9F9F9;filter: invert(1);}",
-        ".Sk .jk span {filter: invert(1);color: #FFF;}",
-        ".Sd {color: #888;}", // div[role=listitem]  span > span // Selector OK
-        ".gk{z-index:10;}", // Full mail // div[role=listitem] > div:nth-child(1)
+        ".Yk .nk b {color: #F9F9F9;filter: invert(1);}", // From
+        ".Yk .ok span {filter: invert(1);color: #FFF;}", // Subject
+        ".Yk .pk {filter: invert(1);color: #888;}", // Snippet
+        ".Sk .ok {color:#CCC; filter:invert(1);}", // Read from
+        ".Sk .pk span, .Sk .pk {filter:invert(1)}", // Read subject and snippet
+    // Message indicator
+        "div[role=listitem]  span > span {color: #888;}", // div[role=listitem]  span > span // Selector OK
+        "div[role=listitem] > div:nth-child(1) {z-index:10;}", // Full mail // div[role=listitem] > div:nth-child(1)
     // Bold date of unread mail
-		".Sk .yi {font-weight: bold; !important}",
+		".Yk .Ei {font-weight: bold !important}",
 	// Margins of arrows
 		".arrows{margin: 1px 6px; width: 20px; height: 20px; vertical-align: text-top; }",
         ".messageCount{width:auto; margin-top:2px;}",
@@ -90,7 +97,7 @@
 		".arrowright{background-image:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAQAAAAngNWGAAAAK0lEQVR4AWMYxuC/5f8d/3mJUVjz////Y8QpbR5ApQiFdFSGCB5iA3y4AwCbRTpxjexg8AAAAABJRU5ErkJggg==)}",
 		//".pi{color:#007b35cc !important;}",
 	// Give space for the left vertical menu //#tl_ #menu + div // Selector OK, use second class
-		".dl{margin-left: 42px;}",
+		"#tl_ #menu + div {margin-left: 42px;}",
 	// Position the menu
 		"#menu{float:left; width:42px;}",
 	// Use img for usual buttons
@@ -100,13 +107,13 @@
 	// Bigger help background
 //		".Dw{min-height: 700px;}",
 	// Allow full text of labels stickers // div[role=listitem] > div[aria-hidden=true] > div > span // Selector OK
-		".if{max-width:none !important;}",
+		"div[role=listitem] > div[aria-hidden=true] > div > span{max-width:none !important;}",
 	// Reduce the header height
 //		".gb_mg>.gb_R, .gb_eg>.gb_R,.gb_eg{line-height:38px !important;height:40px !important;}",
 //		".gb_mg{height:40px !important;}",
-		".Tf{padding-top:10px !important;}", // Title of mail in mail view
-		".Tf .Lh {margin-top: 0px !important;}", // Star, first child of above
-		".Kh {margin-top: -10px !important;}", // Second child of above above
+		"div:has(> div > #cvcstar) {padding-top:10px !important;}", // Title of mail in mail view
+		"div:has( > #cvcstar) {margin-top: 0px !important;}", // Star, first child of above
+		"div:has( > #cvcstar) + div {margin-top: -10px !important;}", // Second child of above above
 	// Subject line when in mail view
 		"span[role=heading]>span {font-size:20px !important;font-weight: bold !important;user-select: text !important;color: #DDD;filter: invert(1);}",
 	// Add external link to open mail in Gmail classic
@@ -133,35 +140,35 @@
 
 	// Var to identify class or id. Google can change them often, so putting them here is helpful
 	// <div class="Og" data-onclick="j">Réception<span class="Yl">6</span></div> // #tltbt > div > div > div > span
-	var numberOfUnreadSpan_class = "tk";
+	var numberOfUnreadSpan_class = "zk";
 	// <div class="Tk ec" tabindex="0" role="menuitem" onclick="_e(event, 'Wb','^i')"><div class="bl undefined"></div><div class="Nk"></div><span>Réception</span></div> .Uk
 	var listOfUsualInMenu_class = "#mn_ > div > div > div > div[role='menuitem']";
 	// <div class="Uk gl "><div onclick="_e(event, 'Xb','label1')" class="fl">
-	var listOfLabelsInMenu_class = "pj";
+	var listOfLabelsInMenu_class = "uj";
 	// <div class="wj " style="background:#FFC8AF;color:#7A2E0B">&nbsp;</div>
-	var ListOfLabelsPatchOfColorInMenu_class = "wj";
-	// <div class="Pg Vp" onclick="_e(event, 'Wb','label2')"><div class="Pk"></div><span>Label 2</span></div>
-	var ListOfLabelsActionTextInMenu_class = "Vp";
+	var ListOfLabelsPatchOfColorInMenu_class = "Bj";
+	// <div class="Pg Vp" onclick="_e(event, 'Wb','label2')"><div class="Pk"></div><span>Label 2</span></div>// Vp
+	var ListOfLabelsActionTextInMenu_class = "nj";
 	// <div id="tl_" class=" Wg  " style="">
 	var mainTimeline_id = "tl_";
 	// <div class="Yg" style="bottom: 0px;"><div id="menu">
 	var parentOfTheMenu_class = "#tl_ > div:nth-child(1)";
 	// <div class="M j T b hc Pm  Ke" onclick="_e(event, 'wa')" role="button" aria-label="Nouveau message" tabindex="0"><div class="V j od"></div></div>
-	var newMailButton_class = "#tltbt > div > div.Gl.d.Pp.Ze.nm.ol.Sb";
+	var newMailButton_class = "#tltbt > div > [aria-label='Nouveau message']";
 	// <div class="us Jm" style="">
-	var mailToolboxBar_class = "#views > div > div.Is.fl";
+	var mailToolboxBar_class = "#views > div > div:has(div[aria-label='Archiver'])";
 	// <div class="kc">
-	var backButtonsInMailView_class = "#cv__cntbt > div.Il, #cv__cntbb > div.Il";
+	var backButtonsInMailView_class = "#cv__cntbt > div.Ol, #cv__cntbb > div.Ol";
 	// <div class="jm" role="list"> .km
 	var mainListOfMail_class = "#tl_ > div > div > div[role='list']";
 	// <div class="fc Im Vm Rc qc Sc" id="tltbt" style="width: 100%;">
 	var secondLineUI_id = "tltbt";
     // Menu in mail view, first classes // div[role=button][data-onclick-arg="1"]
-    var firstClassesOfButtonsMenu_class = "Gl d Pp Ze nm  Cl kl";
+    var firstClassesOfButtonsMenu_class = "Ml d Aq ff tm Il ql";
     // First two of above
-    var arrowsPosition_class = "Gl d";
+    var arrowsPosition_class = "Ml d";
     // Menu in mail, classes of buttons // div[role=button][data-onclick-arg="1"] > div
-    var secondClassesOfButtonsMenu_class = "il d a";
+    var secondClassesOfButtonsMenu_class = "ol d a";
 
 
 	/*
@@ -446,7 +453,11 @@
 			el.addEventListener('click', function(e){
 				var target = e.target.commandTarget;
 				if(target === undefined){
-					target = e.path[1].commandTarget;
+                    if(e.path === undefined){
+                        target = e.currentTarget.commandTarget;
+                    }else{
+                        target = e.path[1].commandTarget;
+                    }
 				}
 				GoTo(target);
 			});
@@ -458,7 +469,11 @@
 			el.addEventListener('click', function(e){
 				var target = e.target.commandTarget;
 				if(target === undefined){
-					target = e.path[1].commandTarget;
+					if(e.path === undefined){
+                        target = e.currentTarget.commandTarget;
+                    }else{
+                        target = e.path[1].commandTarget;
+                    }
 				}
 				GoTo(target);
 			});
